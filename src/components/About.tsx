@@ -1,10 +1,22 @@
+import portraitImage from "@/assets/portrait.webp";
+
 const About = () => {
   return (
     <section id="about" className="py-24 px-6">
       <div className="max-w-4xl mx-auto">
         <div className="grid md:grid-cols-[1fr,2fr] gap-12 md:gap-16">
-          {/* Left column - Section title */}
+          {/* Left column - Photo and Section title */}
           <div>
+            <div className="mb-8">
+              <div className="relative">
+                <img
+                  src={portraitImage}
+                  alt="Josh Lipson"
+                  className="w-full aspect-[3/4] object-cover object-top rounded-sm shadow-elevated"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-background/20 to-transparent rounded-sm" />
+              </div>
+            </div>
             <h2 className="text-sm tracking-[0.3em] uppercase text-primary font-body mb-4">
               About
             </h2>
