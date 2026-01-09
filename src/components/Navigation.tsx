@@ -110,9 +110,10 @@ const Navigation = () => {
           {/* Logo */}
           <Link
             to="/"
-            className="font-display text-xl text-foreground hover:text-primary transition-colors"
+            className="text-lg text-foreground hover:text-primary transition-colors"
+            style={{ fontFamily: "'Noto Sans Arabic', sans-serif" }}
           >
-            JL
+            مفرد بصيغة الجمع
           </Link>
 
           {/* Desktop navigation */}
