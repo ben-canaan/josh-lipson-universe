@@ -118,25 +118,39 @@ const Writing = () => {
               Conversations on podcasts, panels, and publications exploring the frontiers of consciousness research and meaning.
             </p>
             
-            {/* Placeholder for media appearances */}
+            {/* Media appearances */}
             <div className="space-y-4">
-              {[1, 2, 3].map((i) => (
-                <div
-                  key={i}
-                  className="p-4 bg-card rounded-lg shadow-soft hover:shadow-elevated transition-all hover:-translate-y-0.5 cursor-pointer"
+              {[
+                { id: "nLUHDqRW3Ds", title: "Psychedelics & Meaning-Making" },
+                { id: "y7rfmPkzNfs", title: "Consciousness & Deep History" },
+                { id: "WHiKO0EbQ00", title: "The Bicameral Mind Today" },
+                { id: "fBpfT2LCmAw", title: "Cross-Cultural Idioms of Distress" },
+                { id: "hZdAek_A08E", title: "Jewish Genetic Discovery Foundation" },
+              ].map((video) => (
+                <a
+                  key={video.id}
+                  href={`https://www.youtube.com/watch?v=${video.id}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block p-4 bg-card rounded-lg shadow-soft hover:shadow-elevated transition-all hover:-translate-y-0.5 cursor-pointer group"
                 >
-                  <div className="flex items-start justify-between">
-                    <div>
+                  <div className="flex items-start gap-4">
+                    <img
+                      src={`https://img.youtube.com/vi/${video.id}/mqdefault.jpg`}
+                      alt={video.title}
+                      className="w-24 h-14 object-cover rounded"
+                    />
+                    <div className="flex-1">
                       <p className="text-xs text-muted-foreground font-body mb-1">
-                        Podcast / Interview
+                        YouTube
                       </p>
-                      <p className="font-display text-lg text-foreground">
-                        Media appearance {i}
+                      <p className="font-display text-lg text-foreground group-hover:text-primary transition-colors">
+                        {video.title}
                       </p>
                     </div>
-                    <ExternalLink className="w-4 h-4 text-muted-foreground" />
+                    <ExternalLink className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors" />
                   </div>
-                </div>
+                </a>
               ))}
             </div>
           </div>
