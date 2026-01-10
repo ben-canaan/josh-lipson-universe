@@ -121,11 +121,11 @@ const Writing = () => {
             {/* Media appearances */}
             <div className="space-y-4">
               {[
-                { id: "nLUHDqRW3Ds", title: "Psychedelics & Meaning-Making" },
-                { id: "y7rfmPkzNfs", title: "Consciousness & Deep History" },
-                { id: "WHiKO0EbQ00", title: "The Bicameral Mind Today" },
-                { id: "fBpfT2LCmAw", title: "Cross-Cultural Idioms of Distress" },
-                { id: "hZdAek_A08E", title: "Jewish Genetic Discovery Foundation" },
+                { id: "nLUHDqRW3Ds", title: "Psychedelics Today with Joe Moore" },
+                { id: "y7rfmPkzNfs", title: "The Jewish Genetic Discovery Foundation" },
+                { id: "WHiKO0EbQ00", title: "Razib Khan's Unsupervised Learning, with friends" },
+                { id: "fBpfT2LCmAw", title: "Razib Khan's Unsupervised Learning, alone" },
+                { id: "hZdAek_A08E", title: "Walt Whitman and the psychedelic experience" },
               ].map((video) => (
                 <a
                   key={video.id}
