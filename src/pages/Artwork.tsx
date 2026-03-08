@@ -1,3 +1,6 @@
+import Navigation from "@/components/Navigation";
+import Footer from "@/components/Footer";
+import { Palette } from "lucide-react";
 import artwork2 from "@/assets/artwork2.jpeg";
 import artwork4 from "@/assets/artwork4.jpg";
 import artwork5 from "@/assets/artwork5.jpg";
@@ -40,28 +43,4 @@ const Artwork = () => {
             {artworks.map((artwork, i) => (
               <div
                 key={i}
-                className="aspect-square bg-secondary/50 rounded-lg border border-border/30 overflow-hidden group hover:border-primary/30 transition-colors cursor-pointer"
-              >
-                {artwork.src ? (
-                  <img
-                    src={artwork.src}
-                    alt={artwork.alt}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                ) : (
-                  <div className="w-full h-full flex items-center justify-center">
-                    <p className="text-sm text-muted-foreground font-body">Coming soon</p>
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-      </main>
-      
-      <Footer />
-    </div>
-  );
-};
-
-export default Artwork;
+                className="aspect-squ
