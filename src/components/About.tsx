@@ -1,5 +1,4 @@
 import portraitImage from "@/assets/portrait.webp";
-
 const About = () => {
   return (
     <section id="about" className="py-24 px-6">
@@ -42,7 +41,7 @@ const About = () => {
             </p>
             
             <p className="font-body">
-              I also moonlight as a historian, with a focus on Jewish affairs, ideas, and genes from the Iron Age to the 20th century, and am the co-founder of the <a href="#" className="text-primary hover:text-primary/80 underline underline-offset-4 decoration-primary/30 hover:decoration-primary/60 transition-colors">Jewish Genetic Discovery Foundation</a>.
+              I also moonlight as a historian, with a focus on Jewish affairs, ideas, and genes from the Iron Age to the 20th century, and am the co-founder of the <a href="https://jewishgeneticdiscovery.org" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary/80 underline underline-offset-4 decoration-primary/30 hover:decoration-primary/60 transition-colors">Jewish Genetic Discovery Foundation</a>.
             </p>
             
             <p className="font-body text-muted-foreground">
@@ -54,5 +53,4 @@ const About = () => {
     </section>
   );
 };
-
 export default About;
