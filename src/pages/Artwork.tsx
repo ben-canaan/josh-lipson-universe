@@ -43,4 +43,28 @@ const Artwork = () => {
             {artworks.map((artwork, i) => (
               <div
                 key={i}
-                className="aspect-squ
+                className="aspect-square bg-secondary/50 rounded-lg border border-border/30 overflow-hidden group hover:border-primary/30 transition-colors cursor-pointer"
+              >
+                {artwork.src ? (
+                  <img
+                    src={artwork.src}
+                    alt={artwork.alt}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center">
+                    <p className="text-sm text-muted-foreground font-body">Coming soon</p>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </main>
+      
+      <Footer />
+    </div>
+  );
+};
+
+export default Artwork;
