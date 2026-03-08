@@ -1,19 +1,17 @@
-import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
-import { Palette } from "lucide-react";
-
 import artwork2 from "@/assets/artwork2.jpeg";
 import artwork4 from "@/assets/artwork4.jpg";
 import artwork5 from "@/assets/artwork5.jpg";
 import artwork6 from "@/assets/artwork6.jpg";
+import artwork7 from "@/assets/wave.jpg";
+import artwork8 from "@/assets/shirhashirim.jpg";
 
 const artworks = [
   { src: artwork6, alt: "Havdalah Shabbat - red ink painting with Hebrew calligraphy" },
   { src: artwork2, alt: "B'Sadot - colorful watercolor with Hebrew text and landscape" },
   { src: artwork4, alt: "Purple watercolor mountains with Hebrew inscription" },
   { src: artwork5, alt: "Orange watercolor with Hebrew calligraphy" },
-  { src: null, alt: "Ink drawing with Arabic and ancient script" },
-  { src: null, alt: "Multicolored wave text composition" },
+  { src: artwork7, alt: "Ink drawing with Arabic and ancient script" },
+  { src: artwork8, alt: "Shir HaShirim - multicolored wave text composition" },
 ];
 
 const Artwork = () => {
