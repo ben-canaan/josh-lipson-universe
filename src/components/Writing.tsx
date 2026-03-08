@@ -74,3 +74,71 @@ const Writing = () => {
                 <p className="text-sm text-muted-foreground font-body">
                   Unable to load posts. <a href="https://whitmanic.substack.com" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Visit Substack directly →</a>
                 </p>
+              )}
+              {posts?.map((post, i) => (
+                
+                  key={i}
+                  href={post.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block p-4 bg-secondary/50 rounded border border-border/50 hover:border-primary/30 transition-colors cursor-pointer group"
+                >
+                  <p className="text-xs text-muted-foreground font-body mb-1">{post.pubDate}</p>
+                  <p className="font-display text-lg text-foreground group-hover:text-primary transition-colors">{post.title}</p>
+                  <p className="text-sm text-muted-foreground font-body mt-2 line-clamp-2">{post.description}</p>
+                </a>
+              ))}
+            </div>
+          </div>
+          <div>
+            <div className="flex items-center gap-3 mb-6">
+              <Mic className="w-5 h-5 text-primary" />
+              <h2 className="text-sm tracking-[0.3em] uppercase text-primary font-body">
+                Media
+              </h2>
+            </div>
+            <h3 className="font-display text-3xl text-foreground mb-6">
+              Appearances & Interviews
+            </h3>
+            <p className="text-muted-foreground font-body mb-8 leading-relaxed">
+              Conversations on podcasts, panels, and publications exploring the frontiers of consciousness research and meaning.
+            </p>
+            <div className="space-y-4">
+              {[
+                { id: "MHdrURDOM8k", title: "Jewish, Psychedelic Journeys" },
+                { id: "nLUHDqRW3Ds", title: "Psychedelics Today with Joe Moore" },
+                { id: "y7rfmPkzNfs", title: "The Jewish Genetic Discovery Foundation" },
+                { id: "WHiKO0EbQ00", title: "Razib Khan's Unsupervised Learning, with friends" },
+                { id: "fBpfT2LCmAw", title: "Razib Khan's Unsupervised Learning, alone" },
+                { id: "hZdAek_A08E", title: "Walt Whitman and the psychedelic experience" },
+              ].map((video) => (
+                
+                  key={video.id}
+                  href={`https://www.youtube.com/watch?v=${video.id}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block p-4 bg-card rounded-lg shadow-soft hover:shadow-elevated transition-all hover:-translate-y-0.5 cursor-pointer group"
+                >
+                  <div className="flex items-start gap-4">
+                    <img
+                      src={`https://img.youtube.com/vi/${video.id}/mqdefault.jpg`}
+                      alt={video.title}
+                      className="w-24 h-14 object-cover rounded"
+                    />
+                    <div className="flex-1">
+                      <p className="text-xs text-muted-foreground font-body mb-1">YouTube</p>
+                      <p className="font-display text-lg text-foreground group-hover:text-primary transition-colors">{video.title}</p>
+                    </div>
+                    <ExternalLink className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors" />
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default Writing;
