@@ -3,7 +3,7 @@ import { Brain, BookOpen, MessageCircle } from "lucide-react";
 const services = [
   {
     icon: Brain,
-    title: "Psychotherapy (coming soon)",
+    title: "Psychotherapy",
     description: "Clinical psychological services grounded in depth, meaning, and human connection. Specializing in preparation, integration, and meaning-making around psychedelic and spiritual experiences.",
     tag: "Clinical",
   },
