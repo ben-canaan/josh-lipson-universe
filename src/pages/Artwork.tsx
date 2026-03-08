@@ -2,6 +2,20 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Palette } from "lucide-react";
 
+import artwork2 from "@/assets/artwork2.jpeg";
+import artwork4 from "@/assets/artwork4.jpg";
+import artwork5 from "@/assets/artwork5.jpg";
+import artwork6 from "@/assets/artwork6.jpg";
+
+const artworks = [
+  { src: artwork6, alt: "Havdalah Shabbat - red ink painting with Hebrew calligraphy" },
+  { src: artwork2, alt: "B'Sadot - colorful watercolor with Hebrew text and landscape" },
+  { src: artwork4, alt: "Purple watercolor mountains with Hebrew inscription" },
+  { src: artwork5, alt: "Orange watercolor with Hebrew calligraphy" },
+  { src: null, alt: "Ink drawing with Arabic and ancient script" },
+  { src: null, alt: "Multicolored wave text composition" },
+];
+
 const Artwork = () => {
   return (
     <div className="min-h-screen bg-background">
@@ -24,21 +38,23 @@ const Artwork = () => {
             A gallery of visual work exploring texture, symbol, and the interplay of ancient and modern.
           </p>
           
-          {/* Placeholder gallery grid */}
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-            {[1, 2, 3, 4, 5, 6].map((i) => (
+            {artworks.map((artwork, i) => (
               <div
                 key={i}
-                className="aspect-square bg-secondary/50 rounded-lg border border-border/30 flex items-center justify-center group hover:border-primary/30 transition-colors cursor-pointer"
+                className="aspect-square bg-secondary/50 rounded-lg border border-border/30 overflow-hidden group hover:border-primary/30 transition-colors cursor-pointer"
               >
-                <div className="text-center">
-                  <p className="text-sm text-muted-foreground font-body">
-                    Artwork {i}
-                  </p>
-                  <p className="text-xs text-muted-foreground/60 font-body mt-1">
-                    Coming soon
-                  </p>
-                </div>
+                {artwork.src ? (
+                  <img
+                    src={artwork.src}
+                    alt={artwork.alt}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center">
+                    <p className="text-sm text-muted-foreground font-body">Coming soon</p>
+                  </div>
+                )}
               </div>
             ))}
           </div>
