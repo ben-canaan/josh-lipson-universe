@@ -25,7 +25,7 @@ const Poetry = () => {
           </p>
           
           <p className="text-base text-muted-foreground font-body mb-12 leading-relaxed max-w-2xl">
-            Credits in <em>Harbinger Asylum</em>, <em>Angel City Review</em>, <em>Obra/Artifact</em>, <em>Three Line Poetry</em>, <em>Homonym Journal</em>, <em>The Meadow</em>, <em>briars lit</em>, <em>Burning House Press</em>, <em>Anatolios</em>, <em>Petrichor</em>, <em>Haddu's Petition Revue Post</em>, <em>Bookends Review</em>, <em>Humble Pie</em>, <em>Aji</em>, <em>Lammergeier</em>, <em>Sharkpack Annual</em>, <em>Lucky Jefferson</em>, <em>KGB Lit Magazine</em>, <em>8 Poems</em>, <em>in parentheses>, and <em>Wells Street Journal</em>.
+            Credits in <em>Harbinger Asylum</em>, <em>Angel City Review</em>, <em>Obra/Artifact</em>, <em>Three Line Poetry</em>, <em>Homonym Journal</em>, <em>The Meadow</em>, <em>briars lit</em>, <em>Burning House Press</em>, <em>Anatolios</em>, <em>Petrichor</em>, <em>Haddu's Petition Revue Post</em>, <em>Bookends Review</em>, <em>Humble Pie</em>, <em>Aji</em>, <em>Lammergeier</em>, <em>Sharkpack Annual</em>, <em>Lucky Jefferson</em>, <em>KGB Lit Magazine</em>, <em>8 Poems</em>, <em>in parentheses</em>, and <em>Wells Street Journal</em>.
           </p>
           
           <div className="space-y-6">
