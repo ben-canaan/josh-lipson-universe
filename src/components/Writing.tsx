@@ -9,6 +9,29 @@ interface SubstackPost {
 }
 
 const fetchSubstackPosts = async (): Promise<SubstackPost[]> => {
+  // Try the Substack API directly first
+  try {
+    const response = await fetch(
+      "https://whitmanic.substack.com/api/v1/posts?limit=5"
+    );
+    if (response.ok) {
+      const posts = await response.json();
+      return posts.map((item: any) => ({
+        title: item.title,
+        link: item.canonical_url || `https://whitmanic.substack.com/p/${item.slug}`,
+        pubDate: new Date(item.post_date).toLocaleDateString("en-US", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        }),
+        description: (item.subtitle || item.description || "").slice(0, 150) + "...",
+      }));
+    }
+  } catch {
+    // fall through to RSS fallback
+  }
+
+  // Fallback to rss2json
   const response = await fetch(
     "https://api.rss2json.com/v1/api.json?rss_url=https://whitmanic.substack.com/feed"
   );
