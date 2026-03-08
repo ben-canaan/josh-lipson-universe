@@ -3,14 +3,14 @@ import { Brain, BookOpen, MessageCircle } from "lucide-react";
 const services = [
   {
     icon: Brain,
-    title: "Psychotherapy",
-    description: "Clinical psychological services grounded in depth, meaning, and the full complexity of human experience.",
+    title: "Psychotherapy (coming soon)",
+    description: "Clinical psychological services grounded in depth, meaning, and human connection. Specializing in preparation, integration, and meaning-making around psychedelic and spiritual experiences.",
     tag: "Clinical",
   },
   {
     icon: BookOpen,
-    title: "Tutoring",
-    description: "Academic guidance in psychology, history, and the humanities. Languages available: Hebrew, Spanish, Arabic, Portuguese.",
+    title: "Tutoring and Courses",
+    description: "Academic guidance in psychology, history, and the humanities, admissions counseling, and one-on-one tutoring in modern and classical Hebrew. Stay tuned for course offerings.",
     tag: "Education",
   },
   {

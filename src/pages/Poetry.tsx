@@ -20,31 +20,32 @@ const Poetry = () => {
             Verses & Songs
           </h2>
           
-          <p className="text-lg text-muted-foreground font-body mb-12 leading-relaxed max-w-2xl">
+          <p className="text-lg text-muted-foreground font-body mb-6 leading-relaxed max-w-2xl">
             A collection of poems and songs exploring consciousness, longing, history, and the sacred.
           </p>
           
-          {/* Placeholder poems */}
-          <div className="space-y-12">
-            {[1, 2, 3].map((i) => (
-              <article
-                key={i}
-                className="p-8 bg-card rounded-lg shadow-soft border border-border/30"
-              >
-                <h3 className="font-display text-2xl text-foreground mb-2">
-                  Poem Title {i}
-                </h3>
-                <p className="text-sm text-muted-foreground font-body mb-6">
-                  Coming soon
-                </p>
-                <div className="font-body text-foreground/80 leading-relaxed italic">
-                  <p className="mb-4">The first stanza would appear here,</p>
-                  <p className="mb-4">with line breaks preserved as intended</p>
-                  <p className="mb-4">by the poet, carrying rhythm</p>
-                  <p>and meaning through white space.</p>
-                </div>
-              </article>
-            ))}
+          <p className="text-base text-muted-foreground font-body mb-12 leading-relaxed max-w-2xl">
+            Credits in <em>Harbinger Asylum</em>, <em>Angel City Review</em>, <em>Obra/Artifact</em>, <em>Three Line Poetry</em>, <em>Homonym Journal</em>, <em>The Meadow</em>, <em>briars lit</em>, <em>Burning House Press</em>, <em>Anatolios</em>, <em>Petrichor</em>, <em>Haddu's Petition Revue Post</em>, <em>Bookends Review</em>, <em>Humble Pie</em>, <em>Aji</em>, <em>Lammergeier</em>, <em>Sharkpack Annual</em>, <em>Lucky Jefferson</em>, <em>KGB Lit Magazine</em>, <em>8 Poems</em> (in parentheses), and <em>Wells Street Journal</em>.
+          </p>
+          
+          <div className="space-y-6">
+            <a
+              href="https://kgbbarlit.com/content/five-poems-4"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block p-8 bg-card rounded-lg shadow-soft border border-border/30 hover:border-primary/30 hover:-translate-y-0.5 transition-all group"
+            >
+              <h3 className="font-display text-2xl text-foreground group-hover:text-primary transition-colors mb-2">
+                Five Poems
+              </h3>
+              <p className="text-sm text-muted-foreground font-body mb-4">
+                KGB Bar Lit Magazine
+              </p>
+              <span className="inline-flex items-center gap-2 text-primary font-body text-sm">
+                Read at kgbbarlit.com
+                <ExternalLink className="w-4 h-4" />
+              </span>
+            </a>
           </div>
         </div>
       </main>
