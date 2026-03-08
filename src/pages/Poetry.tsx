@@ -1,6 +1,6 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import { Feather } from "lucide-react";
+import { Feather, ExternalLink } from "lucide-react";
 
 const Poetry = () => {
   return (
