@@ -9,37 +9,24 @@ interface SubstackPost {
 }
 
 const fetchSubstackPosts = async (): Promise<SubstackPost[]> => {
-  // Try the Substack API directly first
-  try {
-    const response = await fetch(
-      "https://whitmanic.substack.com/api/v1/posts?limit=5"
-    );
-    if (response.ok) {
-      const posts = await response.json();
-      return posts.map((item: any) => ({
-        title: item.title,
-        link: item.canonical_url || `https://whitmanic.substack.com/p/${item.slug}`,
-        pubDate: new Date(item.post_date).toLocaleDateString("en-US", {
-          year: "numeric",
-          month: "long",
-          day: "numeric",
-        }),
-        description: (item.subtitle || item.description || "").slice(0, 150) + "...",
-      }));
-    }
-  } catch {
-    // fall through to RSS fallback
-  }
-
-  // Fallback to rss2json
   const response = await fetch(
-    "https://api.rss2json.com/v1/api.json?rss_url=https://whitmanic.substack.com/feed"
+    "https://api.allorigins.win/get?url=" + encodeURIComponent("https://whitmanic.substack.com/feed")
   );
   const data = await response.json();
+  const parser = new DOMParser();
+  const xml = parser.parseFromString(data.contents, "text/xml");
+  const items = Array.from(xml.querySelectorAll("item")).slice(0, 5);
   
-  if (data.status !== "ok") {
-    throw new Error("Failed to fetch RSS feed");
-  }
+  return items.map((item) => ({
+    title: item.querySelector("title")?.textContent || "",
+    link: item.querySelector("link")?.textContent || "",
+    pubDate: new Date(item.querySelector("pubDate")?.textContent || "").toLocaleDateString("en-US", {
+      year: "numeric", month: "long", day: "numeric",
+    }),
+    description: (item.querySelector("description")?.textContent || "")
+      .replace(/<[^>]*>/g, "").slice(0, 150) + "...",
+  }));
+};
   
   return data.items.slice(0, 5).map((item: any) => ({
     title: item.title,
