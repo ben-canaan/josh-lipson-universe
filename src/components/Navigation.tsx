@@ -6,7 +6,8 @@ import bannerImage from "@/assets/banner.png";
 const navItems = [
   { label: "About", href: "/#about" },
   { label: "Services", href: "/#services" },
-  { label: "Writing", href: "/#writing" },
+  { label: "Recent Writing", href: "/#writing" },
+  { label: "Essays & Projects", href: "/essays" },
   { label: "Poetry", href: "/poetry" },
   { label: "Artwork", href: "/artwork" },
   { label: "Contact", href: "/#contact" },

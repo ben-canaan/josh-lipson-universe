@@ -1,39 +1,67 @@
-import { ExternalLink, Mic, PenLine, Loader2 } from "lucide-react";
-import { useQuery } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
+import { ExternalLink, Mic, PenLine } from "lucide-react";
 
-interface SubstackPost {
-  title: string;
-  link: string;
-  pubDate: string;
-  description: string;
-}
-
-const fetchSubstackPosts = async (): Promise<SubstackPost[]> => {
-  const response = await fetch(
-    "https://api.allorigins.win/get?url=" + encodeURIComponent("https://whitmanic.substack.com/feed")
-  );
-  const data = await response.json();
-  const parser = new DOMParser();
-  const xml = parser.parseFromString(data.contents, "text/xml");
-  const items = Array.from(xml.querySelectorAll("item")).slice(0, 5);
-
-  return items.map((item) => ({
-    title: item.querySelector("title")?.textContent || "",
-    link: item.querySelector("link")?.textContent || "",
-    pubDate: new Date(item.querySelector("pubDate")?.textContent || "").toLocaleDateString("en-US", {
-      year: "numeric", month: "long", day: "numeric",
-    }),
-    description: (item.querySelector("description")?.textContent || "")
-      .replace(/<[^>]*>/g, "").slice(0, 150) + "...",
-  }));
-};
+const FALLBACK_POSTS = [
+  {
+    title: "The hard problem of AI therapy",
+    subtitle: "Why even 'perfect' AI therapy may be structurally doomed.",
+    pubDate: "February 26, 2026",
+    link: "https://whitmanic.substack.com/p/the-hard-problem-of-ai-therapy",
+  },
+  {
+    title: "The most important pop stars of the future will be religious",
+    subtitle: "On LUX, Rosalía's metamodern Catholic masterpiece.",
+    pubDate: "November 21, 2025",
+    link: "https://whitmanic.substack.com/p/the-most-important-pop-stars-of-the",
+  },
+  {
+    title: "Why the optimal amount of delulu is not zero",
+    subtitle: "And the opposite of depression is not what you think.",
+    pubDate: "November 28, 2025",
+    link: "https://whitmanic.substack.com/p/the-optimal-amount-of-delulu-is-not",
+  },
+  {
+    title: "Semitic triangles: the romance of the three-letter root",
+    subtitle: "On the most obscure game in the world.",
+    pubDate: "December 29, 2025",
+    link: "https://whitmanic.substack.com/p/semitic-triangles-the-most-obscure",
+  },
+  {
+    title: "Why psychedelics don't fit the drug paradigm",
+    subtitle: "A case for thinking differently about psychedelic substances.",
+    pubDate: "",
+    link: "https://whitmanic.substack.com/p/why-psychedelics-dont-fit-the-drug",
+  },
+];
 
 const Writing = () => {
-  const { data: posts, isLoading, error } = useQuery({
-    queryKey: ["substack-posts"],
-    queryFn: fetchSubstackPosts,
-    staleTime: 1000 * 60 * 30,
-  });
+  const [posts, setPosts] = useState(FALLBACK_POSTS);
+
+  useEffect(() => {
+    fetch("/api/substack-feed")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.items && data.items.length > 0) {
+          setPosts(
+            data.items.map((item: any) => ({
+              title: item.title,
+              subtitle: item.subtitle,
+              pubDate: item.pubDate
+                ? new Date(item.pubDate).toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })
+                : "",
+              link: item.link,
+            }))
+          );
+        }
+      })
+      .catch(() => {
+        // silently keep fallback
+      });
+  }, []);
 
   return (
     <section id="writing" className="py-24 px-6">
@@ -47,7 +75,7 @@ const Writing = () => {
               </h2>
             </div>
             <h3 className="font-display text-3xl text-foreground mb-6">
-              Essays and Reflections
+              Recent Writing
             </h3>
             <p className="text-muted-foreground font-body mb-8 leading-relaxed">
               Explorations in meaning-making, consciousness, history, and the human condition. Subscribe to stay connected with new work.
@@ -64,18 +92,7 @@ const Writing = () => {
               <ExternalLink className="w-4 h-4" />
             </a>
             <div className="mt-8 space-y-4">
-              {isLoading && (
-                <div className="flex items-center gap-2 text-muted-foreground">
-                  <Loader2 className="w-4 h-4 animate-spin" />
-                  <span className="text-sm font-body">Loading posts...</span>
-                </div>
-              )}
-              {error && (
-                <p className="text-sm text-muted-foreground font-body">
-                  Unable to load posts. Visit Substack directly.
-                </p>
-              )}
-              {posts?.map((post, i) => (
+              {posts.map((post, i) => (
                 <a
                   key={i}
                   href={post.link}
@@ -83,9 +100,13 @@ const Writing = () => {
                   rel="noopener noreferrer"
                   className="block p-4 bg-secondary/50 rounded border border-border/50 hover:border-primary/30 transition-colors cursor-pointer group"
                 >
-                  <p className="text-xs text-muted-foreground font-body mb-1">{post.pubDate}</p>
+                  {post.pubDate && (
+                    <p className="text-xs text-muted-foreground font-body mb-1">{post.pubDate}</p>
+                  )}
                   <p className="font-display text-lg text-foreground group-hover:text-primary transition-colors">{post.title}</p>
-                  <p className="text-sm text-muted-foreground font-body mt-2 line-clamp-2">{post.description}</p>
+                  {post.subtitle && (
+                    <p className="text-sm text-muted-foreground font-body mt-2 line-clamp-2">{post.subtitle}</p>
+                  )}
                 </a>
               ))}
             </div>
