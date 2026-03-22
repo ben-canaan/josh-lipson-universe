@@ -5,7 +5,7 @@ import { Feather, ExternalLink, X } from "lucide-react";
 
 const poems = [
   {
-    title: "Tehom-Rabba (The Space Between The Notes)",
+    title: "Tehom-Rabba",
     publication: "Obra/Artifact",
     link: null,
     lines: [
