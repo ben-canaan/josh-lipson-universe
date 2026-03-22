@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import { Feather, ExternalLink, ChevronDown } from "lucide-react";
+import { Feather, ExternalLink, X } from "lucide-react";
 
 const poems = [
   {
@@ -22,7 +22,7 @@ const poems = [
   },
   {
     title: "Hathor",
-    publication: null,
+    publication: "Angel City Review",
     link: null,
     lines: [
       "things that never occurred to me",
@@ -105,8 +105,8 @@ const poems = [
   },
   {
     title: "Pulses",
-    publication: null,
-    link: null,
+    publication: "KGB Bar Lit Magazine",
+    link: "https://kgbbarlit.com/content/five-poems-4",
     lines: [
       "Second sleepless morning mid-October",
       "Istanbul: the shock doctrine.",
@@ -269,67 +269,68 @@ const poems = [
   },
 ];
 
-const PoemAccordion = ({ poem }: { poem: typeof poems[0] }) => {
-  const [open, setOpen] = useState(false);
+type Poem = typeof poems[0];
 
+const PoemModal = ({ poem, onClose }: { poem: Poem; onClose: () => void }) => {
   return (
-    <div className="border-b border-border/50 last:border-0">
-      <button
-        onClick={() => setOpen(!open)}
-        className="w-full flex items-center justify-between py-5 text-left group"
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center p-6 bg-background/80 backdrop-blur-sm"
+      onClick={onClose}
+    >
+      <div
+        className="relative bg-card border border-border rounded-lg shadow-elevated max-w-xl w-full max-h-[80vh] overflow-y-auto p-8"
+        onClick={(e) => e.stopPropagation()}
       >
-        <div>
-          <h3 className="font-display text-xl text-foreground group-hover:text-primary transition-colors">
-            {poem.title}
-          </h3>
-          {poem.publication && (
-            <p className="text-xs text-muted-foreground font-body mt-1 tracking-wide">
-              {poem.publication}
-            </p>
-          )}
-        </div>
-        <ChevronDown
-          className={`w-4 h-4 text-muted-foreground shrink-0 ml-4 transition-transform duration-200 ${
-            open ? "rotate-180" : ""
-          }`}
-        />
-      </button>
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4 text-muted-foreground hover:text-foreground transition-colors"
+          aria-label="Close"
+        >
+          <X className="w-5 h-5" />
+        </button>
 
-      {open && (
-        <div className="pb-8">
-          <div className="font-body text-foreground/85 leading-relaxed space-y-0">
-            {poem.lines.map((line, i) =>
-              line === "" ? (
-                <div key={i} className="h-4" />
-              ) : (
-                <p key={i}>{line}</p>
-              )
-            )}
-          </div>
-          {poem.link && (
-            <a
-              href={poem.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 mt-6 text-sm font-body text-primary hover:text-primary/80 transition-colors"
-            >
-              Read at {poem.publication}
-              <ExternalLink className="w-3 h-3" />
-            </a>
+        <h3 className="font-display text-2xl text-foreground mb-1">{poem.title}</h3>
+        {poem.publication && (
+          <p className="text-xs text-muted-foreground font-body tracking-wide mb-8">
+            {poem.publication}
+          </p>
+        )}
+
+        <div className="font-body text-foreground/85 leading-relaxed">
+          {poem.lines.map((line, i) =>
+            line === "" ? (
+              <div key={i} className="h-4" />
+            ) : (
+              <p key={i}>{line}</p>
+            )
           )}
         </div>
-      )}
+
+        {poem.link && (
+          <a
+            href={poem.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 mt-8 text-sm font-body text-primary hover:text-primary/80 transition-colors"
+          >
+            Read at {poem.publication}
+            <ExternalLink className="w-3 h-3" />
+          </a>
+        )}
+      </div>
     </div>
   );
 };
 
 const Poetry = () => {
+  const [selectedPoem, setSelectedPoem] = useState<Poem | null>(null);
+
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
 
       <main className="pt-32 pb-24 px-6">
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-4xl mx-auto">
           <div className="flex items-center gap-3 mb-6">
             <Feather className="w-5 h-5 text-primary" />
             <h1 className="text-sm tracking-[0.3em] uppercase text-primary font-body">
@@ -355,15 +356,32 @@ const Poetry = () => {
             <em>in parentheses</em>, and <em>Wells Street Journal</em>.
           </p>
 
-          <div>
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
             {poems.map((poem, i) => (
-              <PoemAccordion key={i} poem={poem} />
+              <button
+                key={i}
+                onClick={() => setSelectedPoem(poem)}
+                className="text-left p-6 bg-card border border-border/50 rounded-lg hover:border-primary/40 hover:-translate-y-0.5 hover:shadow-elevated transition-all group"
+              >
+                <h3 className="font-display text-lg text-foreground group-hover:text-primary transition-colors mb-2 leading-snug">
+                  {poem.title}
+                </h3>
+                {poem.publication && (
+                  <p className="text-xs text-muted-foreground font-body tracking-wide">
+                    {poem.publication}
+                  </p>
+                )}
+              </button>
             ))}
           </div>
         </div>
       </main>
 
       <Footer />
+
+      {selectedPoem && (
+        <PoemModal poem={selectedPoem} onClose={() => setSelectedPoem(null)} />
+      )}
     </div>
   );
 };
