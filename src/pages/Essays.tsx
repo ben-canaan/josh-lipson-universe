@@ -64,13 +64,13 @@ const essays = [
 const academicWork = [
   {
     title: "Baseline Mood and 'Relational Triad' Predict Acute Qualities of Psychedelic Experience",
-    venue: "PubMed · Columbia University",
+    venue: "Behavioral Science · Dissertation Work · Columbia University",
     year: "2025",
     link: "https://pubmed.ncbi.nlm.nih.gov/41750119/",
   },
   {
     title: "Self, Other, and Higher Power: A 'Relational Triad' Moderates Associations Between Mystical Experience and Mental Health",
-    venue: "International Journal for the Psychology of Religion · Columbia University",
+    venue: "International Journal for the Psychology of Religion · Dissertation Work · Columbia University",
     year: "2024",
     link: "https://www.tandfonline.com/doi/abs/10.1080/10508619.2024.2422171",
   },
