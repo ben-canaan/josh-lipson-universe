@@ -54,7 +54,7 @@ const essays = [
   {
     title: "Why psychedelics don't fit the drug paradigm",
     subtitle: "",
-    date: "",
+    date: "December 2024",
     publication: "Lucid News",
     link: "https://www.lucid.news/why-psychedelics-dont-fit-the-drug-paradigm/",
     tags: ["psychedelics", "psychology"],
