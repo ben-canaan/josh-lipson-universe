@@ -82,7 +82,7 @@ const poems = [
       "Song of the Sea — this too is a state",
       "Let your mind fall upon a face",
       "Let your mind recall a face",
-      "Let your mind take another shape",
+      "Let your mind assume another shape",
       "",
       "My pen is in my mouth",
       "I laugh in the reflexive",
