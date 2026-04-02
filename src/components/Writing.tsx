@@ -126,7 +126,8 @@ const Writing = () => {
             </p>
             <div className="space-y-4">
               {[
-                { id: "MHdrURDOM8k", title: "Jewish, Psychedelic Journeys" },
+                { id: "y0Tz2D77hfU", title: "Atlanta Mushroom Festival: Post-Psychedelic Challenges" },
+                { id: "MHdrURDOM8k", title: "Judaism Unbound: Jewish, Psychedelic Journeys" },
                 { id: "nLUHDqRW3Ds", title: "Psychedelics Today with Joe Moore" },
                 { id: "y7rfmPkzNfs", title: "The Jewish Genetic Discovery Foundation" },
                 { id: "WHiKO0EbQ00", title: "Razib Khan's Unsupervised Learning, with friends" },
