@@ -4,20 +4,20 @@ import { ExternalLink } from "lucide-react";
 
 const essays = [
   {
-    title: "Have You Had Difficulties After a Trip? The Emory Center for Psychedelics and Spirituality Wants to Hear From You",
-    subtitle: "On the Post-Psychedelic Challenges Study and why the harder end of psychedelic experience deserves honest research.",
-    date: "August 2026",
-    publication: "Lucid News",
-    link: "https://www.lucid.news/difficulties-after-a-trip-emory-center-for-psychedelics/",
-    tags: ["psychedelics", "research", "psychology"],
-  },
-  {
     title: "Sorry to burst your bubble?",
     subtitle: "Metaphor, placebo, and the ethics of disenchantment.",
     date: "May 2026",
     publication: "Whitmanic",
     link: "https://whitmanic.substack.com/p/sorry-to-burst-your-bubble",
     tags: ["psychology", "placebo", "psychedelics"],
+  },
+  {
+    title: "Speaking nuance to hype",
+    subtitle: "The Post-Psychedelic Challenges Study, and a life ethos.",
+    date: "April 2026",
+    publication: "Whitmanic",
+    link: "https://whitmanic.substack.com/p/speaking-nuance-to-hype",
+    tags: ["psychedelics", "research", "psychology"],
   },
   {
     title: "When I fed Claude Code 804 of my poems",
@@ -105,6 +105,12 @@ const academicWork = [
 ];
 
 const projects = [
+  {
+    title: "Post-Psychedelic Challenges Study",
+    description: "An international multi-site study examining the nature, prevalence, and resolution of difficulties that persist after psychedelic experiences. Launched in summer 2025 through the Emory Center for Psychedelics and Spirituality, led by Dr. Roman Palitsky. Currently the largest dataset of its kind.",
+    link: "https://www.lucid.news/difficulties-after-a-trip-emory-center-for-psychedelics/",
+    linkLabel: "Read about the study",
+  },
   {
     title: "Jewish Genetic Discovery Foundation",
     description:
