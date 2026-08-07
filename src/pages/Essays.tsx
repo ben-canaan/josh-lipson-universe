@@ -4,6 +4,22 @@ import { ExternalLink } from "lucide-react";
 
 const essays = [
   {
+    title: "Have You Had Difficulties After a Trip? The Emory Center for Psychedelics and Spirituality Wants to Hear From You",
+    subtitle: "On the Post-Psychedelic Challenges Study and why the harder end of psychedelic experience deserves honest research.",
+    date: "August 2026",
+    publication: "Lucid News",
+    link: "https://www.lucid.news/difficulties-after-a-trip-emory-center-for-psychedelics/",
+    tags: ["psychedelics", "research", "psychology"],
+  },
+  {
+    title: "Sorry to burst your bubble?",
+    subtitle: "Metaphor, placebo, and the ethics of disenchantment.",
+    date: "May 2026",
+    publication: "Whitmanic",
+    link: "https://whitmanic.substack.com/p/sorry-to-burst-your-bubble",
+    tags: ["psychology", "placebo", "psychedelics"],
+  },
+  {
     title: "When I fed Claude Code 804 of my poems",
     subtitle: "The awesome and grotesque act of building a concordance.",
     date: "March 2026",
@@ -50,14 +66,6 @@ const essays = [
     publication: "Whitmanic",
     link: "https://whitmanic.substack.com/p/the-most-important-pop-stars-of-the",
     tags: ["music", "religion", "culture"],
-  },
-  {
-    title: "Have You Had Difficulties After a Trip? The Emory Center for Psychedelics and Spirituality Wants to Hear From You",
-    subtitle: "On the Post-Psychedelic Challenges Study and why the harder end of psychedelic experience deserves honest research.",
-    date: "August 2026",
-    publication: "Lucid News",
-    link: "https://www.lucid.news/difficulties-after-a-trip-emory-center-for-psychedelics/",
-    tags: ["psychedelics", "research", "psychology"],
   },
   {
     title: "Why psychedelics don't fit the drug paradigm",
