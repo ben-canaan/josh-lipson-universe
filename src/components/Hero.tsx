@@ -1,4 +1,4 @@
-import { ArrowDown } from "lucide-react";
+import React from "react";
 
 const Hero = () => {
   return (
@@ -20,14 +20,6 @@ const Hero = () => {
           I help people feel at home in deep time, and in the deep ends of the mind.
         </p>
       </div>
-      
-      <a 
-        href="#about"
-        className="mt-16 flex flex-col items-center gap-2 text-muted-foreground hover:text-primary transition-colors duration-300 opacity-0 animate-fade-in stagger-5"
-      >
-        <span className="text-xs tracking-widest uppercase font-body">Explore</span>
-        <ArrowDown className="w-4 h-4 animate-bounce" />
-      </a>
     </section>
   );
 };
