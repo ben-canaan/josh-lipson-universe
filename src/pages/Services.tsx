@@ -101,7 +101,7 @@ const Services = () => {
               </h2>
             </div>
             <p className="text-muted-foreground font-body leading-relaxed max-w-2xl">
-              Academic guidance in psychology, history, and the humanities, admissions counseling, and one-on-one tutoring in modern and classical Hebrew. Boutique course offerings coming soon.
+              Academic guidance in psychology, history, and the humanities, admissions counseling, and one-on-one tutoring in modern and classical Hebrew. Boutique course offerings (e.g. "Psychedelic Spirituality", "Hebrew for Mystics and Poets") coming soon.
             </p>
           </section>
 
