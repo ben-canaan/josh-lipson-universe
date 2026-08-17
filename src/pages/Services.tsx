@@ -47,7 +47,7 @@ const Services = () => {
               className="inline-flex items-center gap-2 text-foreground hover:text-primary transition-colors font-body group"
             >
               <span className="border-b border-foreground/20 group-hover:border-primary pb-1">
-                Visit the practice site
+                Visit my practice site
               </span>
               <ExternalLink className="w-4 h-4" />
             </a>
