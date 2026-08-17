@@ -9,7 +9,7 @@ const Services = () => {
           Work With Me
         </h2>
         <p className="font-display text-2xl md:text-3xl text-foreground mb-6 max-w-xl mx-auto">
-          Private practice, consulting, speaking, and courses.
+          Individual psychotherapy, consulting, speaking, and courses.
         </p>
         <Link
           to="/services"
