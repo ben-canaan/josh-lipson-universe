@@ -2,7 +2,7 @@ import React from "react";
 
 const Hero = () => {
   return (
-    <section className="flex flex-col justify-center items-center px-6 pt-32 pb-16 relative">
+    <section className="min-h-[85vh] flex flex-col justify-center items-center px-6 py-20 relative">
       {/* Subtle decorative element */}
       <div className="absolute top-20 right-10 w-32 h-32 rounded-full bg-primary/5 blur-3xl animate-float" />
       <div className="absolute bottom-8 left-10 w-24 h-24 rounded-full bg-accent/10 blur-2xl animate-float" style={{ animationDelay: '2s' }} />
