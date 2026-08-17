@@ -126,31 +126,72 @@ const Writing = () => {
             </p>
             <div className="space-y-4">
               {[
-                { id: "10TIZQzzVvU", title: "The State of Psychedelic Research: A Mycelial Explosion" },
-                { id: "MHdrURDOM8k", title: "Jewish, Psychedelic Journeys" },
-                { id: "nLUHDqRW3Ds", title: "Psychedelics Today with Joe Moore" },
-                { id: "y7rfmPkzNfs", title: "The Jewish Genetic Discovery Foundation" },
-                { id: "WHiKO0EbQ00", title: "Razib Khan's Unsupervised Learning, with friends" },
-                { id: "fBpfT2LCmAw", title: "Razib Khan's Unsupervised Learning, alone" },
-                { id: "hZdAek_A08E", title: "Walt Whitman and the psychedelic experience" },
-              ].map((video) => (
+                {
+                  title: "Josh Lipson & Roman Palitsky: Psychedelic Harms and the Post-Psychedelic Challenges Study",
+                  source: "Psychedelics Today",
+                  link: "https://psychedelicstoday.com/2026/08/12/psychedelic-harms-post-psychedelic-challenges/",
+                  thumbnail: "https://eynv69fbkkd.exactdn.com/wp-content/uploads/2026/08/PT660-Lipson-Palitsky.jpg",
+                },
+                {
+                  title: "The State of Psychedelic Research: A Mycelial Explosion",
+                  source: "YouTube",
+                  link: "https://www.youtube.com/watch?v=10TIZQzzVvU",
+                  thumbnail: "https://img.youtube.com/vi/10TIZQzzVvU/mqdefault.jpg",
+                },
+                {
+                  title: "Jewish, Psychedelic Journeys",
+                  source: "YouTube",
+                  link: "https://www.youtube.com/watch?v=MHdrURDOM8k",
+                  thumbnail: "https://img.youtube.com/vi/MHdrURDOM8k/mqdefault.jpg",
+                },
+                {
+                  title: "Psychedelics Today with Joe Moore",
+                  source: "YouTube",
+                  link: "https://www.youtube.com/watch?v=nLUHDqRW3Ds",
+                  thumbnail: "https://img.youtube.com/vi/nLUHDqRW3Ds/mqdefault.jpg",
+                },
+                {
+                  title: "The Jewish Genetic Discovery Foundation",
+                  source: "YouTube",
+                  link: "https://www.youtube.com/watch?v=y7rfmPkzNfs",
+                  thumbnail: "https://img.youtube.com/vi/y7rfmPkzNfs/mqdefault.jpg",
+                },
+                {
+                  title: "Razib Khan's Unsupervised Learning, with friends",
+                  source: "YouTube",
+                  link: "https://www.youtube.com/watch?v=WHiKO0EbQ00",
+                  thumbnail: "https://img.youtube.com/vi/WHiKO0EbQ00/mqdefault.jpg",
+                },
+                {
+                  title: "Razib Khan's Unsupervised Learning, alone",
+                  source: "YouTube",
+                  link: "https://www.youtube.com/watch?v=fBpfT2LCmAw",
+                  thumbnail: "https://img.youtube.com/vi/fBpfT2LCmAw/mqdefault.jpg",
+                },
+                {
+                  title: "Walt Whitman and the psychedelic experience",
+                  source: "YouTube",
+                  link: "https://www.youtube.com/watch?v=hZdAek_A08E",
+                  thumbnail: "https://img.youtube.com/vi/hZdAek_A08E/mqdefault.jpg",
+                },
+              ].map((appearance) => (
                 <a
-                  key={video.id}
-                  href={`https://www.youtube.com/watch?v=${video.id}`}
+                  key={appearance.link}
+                  href={appearance.link}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block p-4 bg-card rounded-lg shadow-soft hover:shadow-elevated transition-all hover:-translate-y-0.5 cursor-pointer group"
                 >
                   <div className="flex items-start gap-4">
                     <img
-                      src={`https://img.youtube.com/vi/${video.id}/mqdefault.jpg`}
-                      alt={video.title}
+                      src={appearance.thumbnail}
+                      alt={appearance.title}
                       className="w-24 h-14 object-cover rounded"
                     />
                     <div className="flex-1">
-                      <p className="text-xs text-muted-foreground font-body mb-1">YouTube</p>
+                      <p className="text-xs text-muted-foreground font-body mb-1">{appearance.source}</p>
                       <p className="font-display text-lg text-foreground group-hover:text-primary transition-colors">
-                        {video.title}
+                        {appearance.title}
                       </p>
                     </div>
                     <ExternalLink className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors" />
