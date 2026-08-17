@@ -18,6 +18,30 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;500&display=swap" rel="stylesheet">
   </head>
   <body>
+    <!--
+  NETLIFY FORM DETECTION FIX
+
+  Netlify's form-detection bot only scans static HTML produced at build time —
+  it doesn't run JavaScript. Since the real contact form in Contact.tsx is
+  rendered by React at runtime, Netlify's bot never sees it, so the form
+  doesn't get registered and submissions can silently fail.
+
+  The fix: add this hidden, plain-HTML form to index.html (at the project
+  root, alongside package.json — NOT inside src/). It has the exact same
+  name and field names as the real React form. Netlify's bot detects THIS
+  one during build and registers it. Your real form's submissions then match
+  up to it correctly, because they share the same form name and fields.
+
+  This form is never shown to visitors and never submitted directly —
+  it exists purely so Netlify's build-time bot has static HTML to scan.
+-->
+<form name="contact" data-netlify="true" netlify-honeypot="bot-field" hidden>
+  <input type="text" name="name" />
+  <input type="email" name="email" />
+  <input type="text" name="subject" />
+  <textarea name="message"></textarea>
+  <input type="text" name="bot-field" />
+</form>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
