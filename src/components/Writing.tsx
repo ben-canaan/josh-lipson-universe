@@ -1,6 +1,42 @@
 import { useEffect, useState } from "react";
 import { ExternalLink, Mic, PenLine } from "lucide-react";
 
+const AppearanceCard = ({ appearance }: { appearance: { title: string; source: string; link: string; thumbnail: string | null } }) => {
+  const [imgFailed, setImgFailed] = useState(false);
+  const showImage = appearance.thumbnail && !imgFailed;
+
+  return (
+    <a
+      href={appearance.link}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="block p-4 bg-card rounded-lg shadow-soft hover:shadow-elevated transition-all hover:-translate-y-0.5 cursor-pointer group"
+    >
+      <div className="flex items-start gap-4">
+        {showImage ? (
+          <img
+            src={appearance.thumbnail!}
+            alt={appearance.title}
+            className="w-24 h-14 object-cover rounded shrink-0"
+            onError={() => setImgFailed(true)}
+          />
+        ) : (
+          <div className="w-24 h-14 rounded bg-secondary flex items-center justify-center shrink-0">
+            <Mic className="w-6 h-6 text-muted-foreground" />
+          </div>
+        )}
+        <div className="flex-1">
+          <p className="text-xs text-muted-foreground font-body mb-1">{appearance.source}</p>
+          <p className="font-display text-lg text-foreground group-hover:text-primary transition-colors">
+            {appearance.title}
+          </p>
+        </div>
+        <ExternalLink className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors shrink-0" />
+      </div>
+    </a>
+  );
+};
+
 const FALLBACK_POSTS = [
   {
     title: "The hard problem of AI therapy",
@@ -142,7 +178,7 @@ const Writing = () => {
                   title: "Jewish, Psychedelic Journeys",
                   source: "Judaism Unbound",
                   link: "https://www.judaismunbound.com/podcast/episode-523-zac-kamenetz-josh-lipson",
-                  thumbnail: "https://images.squarespace-cdn.com/content/v1/62ceb48ec615694a1756883f/62cec2f19e4d521e29ad71d6/69978fa1edf011317bbfbfa0/1771565470711/Zac+Kamenetz%2C+Josh+Lipson+Thumbnail.png?format=1500w",
+                  thumbnail: "https://static1.squarespace.com/static/62ceb48ec615694a1756883f/62cec2f19e4d521e29ad71d6/69978fa1edf011317bbfbfa0/1771565470711/Zac+Kamenetz%2C+Josh+Lipson+Thumbnail.png?format=1500w",
                 },
                 {
                   title: "Emory's Psychedelic Challenges Project: Speaking Nuance to Hype",
@@ -175,34 +211,7 @@ const Writing = () => {
                   thumbnail: "https://substackcdn.com/image/fetch/$s_!Q7d-!,w_144,h_144,c_fill,f_auto,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2F2c48569f-373c-4d04-96a3-1aad755a419b_3000x3000.png",
                 },
               ].map((appearance) => (
-                <a
-                  key={appearance.link}
-                  href={appearance.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block p-4 bg-card rounded-lg shadow-soft hover:shadow-elevated transition-all hover:-translate-y-0.5 cursor-pointer group"
-                >
-                  <div className="flex items-start gap-4">
-                    {appearance.thumbnail ? (
-                      <img
-                        src={appearance.thumbnail}
-                        alt={appearance.title}
-                        className="w-24 h-14 object-cover rounded shrink-0"
-                      />
-                    ) : (
-                      <div className="w-24 h-14 rounded bg-secondary flex items-center justify-center shrink-0">
-                        <Mic className="w-6 h-6 text-muted-foreground" />
-                      </div>
-                    )}
-                    <div className="flex-1">
-                      <p className="text-xs text-muted-foreground font-body mb-1">{appearance.source}</p>
-                      <p className="font-display text-lg text-foreground group-hover:text-primary transition-colors">
-                        {appearance.title}
-                      </p>
-                    </div>
-                    <ExternalLink className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors shrink-0" />
-                  </div>
-                </a>
+                <AppearanceCard key={appearance.link} appearance={appearance} />
               ))}
             </div>
           </div>
