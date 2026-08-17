@@ -17,7 +17,7 @@ const Hero = () => {
         </h1>
         
         <p className="text-xl md:text-2xl font-display italic text-muted-foreground leading-relaxed max-w-2xl mx-auto opacity-0 animate-fade-up stagger-2">
-          Clinical psychologist, researcher, and writer exploring psychedelics, meaning-making, deep history, and consciousness.
+          I help people feel at home in deep time, and in the deep ends of the mind.
         </p>
       </div>
       
