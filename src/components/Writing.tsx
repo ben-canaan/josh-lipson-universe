@@ -127,52 +127,52 @@ const Writing = () => {
             <div className="space-y-4">
               {[
                 {
-                  title: "Josh Lipson & Roman Palitsky: Psychedelic Harms and the Post-Psychedelic Challenges Study",
+                  title: "Psychedelic Harms and the Post-Psychedelic Challenges Study",
                   source: "Psychedelics Today",
                   link: "https://psychedelicstoday.com/2026/08/12/psychedelic-harms-post-psychedelic-challenges/",
                   thumbnail: "https://eynv69fbkkd.exactdn.com/wp-content/uploads/2026/08/PT660-Lipson-Palitsky.jpg",
                 },
                 {
                   title: "The State of Psychedelic Research: A Mycelial Explosion",
-                  source: "YouTube",
+                  source: "Mushroom Club of Georgia",
                   link: "https://www.youtube.com/watch?v=10TIZQzzVvU",
                   thumbnail: "https://img.youtube.com/vi/10TIZQzzVvU/mqdefault.jpg",
                 },
                 {
                   title: "Jewish, Psychedelic Journeys",
-                  source: "YouTube",
-                  link: "https://www.youtube.com/watch?v=MHdrURDOM8k",
-                  thumbnail: "https://img.youtube.com/vi/MHdrURDOM8k/mqdefault.jpg",
+                  source: "Judaism Unbound",
+                  link: "https://www.judaismunbound.com/podcast/episode-523-zac-kamenetz-josh-lipson",
+                  thumbnail: null,
                 },
                 {
-                  title: "Psychedelics Today with Joe Moore",
-                  source: "YouTube",
-                  link: "https://www.youtube.com/watch?v=nLUHDqRW3Ds",
-                  thumbnail: "https://img.youtube.com/vi/nLUHDqRW3Ds/mqdefault.jpg",
+                  title: "Emory's Psychedelic Challenges Project: Speaking Nuance to Hype",
+                  source: "Atlanta Mushroom Festival",
+                  link: "https://www.youtube.com/watch?v=y0Tz2D77hfU",
+                  thumbnail: "https://img.youtube.com/vi/y0Tz2D77hfU/mqdefault.jpg",
                 },
                 {
                   title: "The Jewish Genetic Discovery Foundation",
-                  source: "YouTube",
+                  source: "Launch at Kehila Kedosha Janina",
                   link: "https://www.youtube.com/watch?v=y7rfmPkzNfs",
                   thumbnail: "https://img.youtube.com/vi/y7rfmPkzNfs/mqdefault.jpg",
                 },
                 {
-                  title: "Razib Khan's Unsupervised Learning, with friends",
-                  source: "YouTube",
-                  link: "https://www.youtube.com/watch?v=WHiKO0EbQ00",
-                  thumbnail: "https://img.youtube.com/vi/WHiKO0EbQ00/mqdefault.jpg",
+                  title: "How Psychedelics Impact the Mind: Mysticism, Mental Health, and the Future of Psychedelic Research",
+                  source: "Psychedelics Today",
+                  link: "https://psychedelicstoday.com/2025/02/04/how-psychedelics-impact-the-mind-mysticism-mental-health-and-the-future-of-psychedelic-research/",
+                  thumbnail: "https://eynv69fbkkd.exactdn.com/wp-content/uploads/2025/02/PT584-Josh-Lipson.jpg",
                 },
                 {
-                  title: "Razib Khan's Unsupervised Learning, alone",
-                  source: "YouTube",
-                  link: "https://www.youtube.com/watch?v=fBpfT2LCmAw",
-                  thumbnail: "https://img.youtube.com/vi/fBpfT2LCmAw/mqdefault.jpg",
+                  title: "The Medieval Origins of the Ashkenazim",
+                  source: "Razib Khan's Unsupervised Learning",
+                  link: "https://razib.substack.com/p/joshua-lipson-aric-lomes-and-leo",
+                  thumbnail: null,
                 },
                 {
-                  title: "Walt Whitman and the psychedelic experience",
-                  source: "YouTube",
-                  link: "https://www.youtube.com/watch?v=hZdAek_A08E",
-                  thumbnail: "https://img.youtube.com/vi/hZdAek_A08E/mqdefault.jpg",
+                  title: "On Jewish Genetic Genealogy",
+                  source: "Razib Khan's Unsupervised Learning",
+                  link: "https://www.razibkhan.com/p/joshua-lipson-on-jewish-genetic-genealogy",
+                  thumbnail: null,
                 },
               ].map((appearance) => (
                 <a
@@ -183,18 +183,24 @@ const Writing = () => {
                   className="block p-4 bg-card rounded-lg shadow-soft hover:shadow-elevated transition-all hover:-translate-y-0.5 cursor-pointer group"
                 >
                   <div className="flex items-start gap-4">
-                    <img
-                      src={appearance.thumbnail}
-                      alt={appearance.title}
-                      className="w-24 h-14 object-cover rounded"
-                    />
+                    {appearance.thumbnail ? (
+                      <img
+                        src={appearance.thumbnail}
+                        alt={appearance.title}
+                        className="w-24 h-14 object-cover rounded shrink-0"
+                      />
+                    ) : (
+                      <div className="w-24 h-14 rounded bg-secondary flex items-center justify-center shrink-0">
+                        <Mic className="w-6 h-6 text-muted-foreground" />
+                      </div>
+                    )}
                     <div className="flex-1">
                       <p className="text-xs text-muted-foreground font-body mb-1">{appearance.source}</p>
                       <p className="font-display text-lg text-foreground group-hover:text-primary transition-colors">
                         {appearance.title}
                       </p>
                     </div>
-                    <ExternalLink className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors" />
+                    <ExternalLink className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors shrink-0" />
                   </div>
                 </a>
               ))}
