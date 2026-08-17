@@ -1,5 +1,23 @@
 import { useState } from "react";
-import { Mail } from "lucide-react";
+import { Mail, Linkedin, BookOpen, GraduationCap } from "lucide-react";
+
+const socialLinks = [
+  {
+    name: "LinkedIn",
+    href: "https://www.linkedin.com/in/jlipson/",
+    icon: Linkedin,
+  },
+  {
+    name: "Substack",
+    href: "https://whitmanic.substack.com/",
+    icon: BookOpen,
+  },
+  {
+    name: "Google Scholar",
+    href: "https://scholar.google.com/citations?user=hi0H3xgAAAAJ&hl=en",
+    icon: GraduationCap,
+  },
+];
 
 const Contact = () => {
   const [submitted, setSubmitted] = useState(false);
@@ -28,11 +46,28 @@ const Contact = () => {
   return (
     <section id="contact" className="py-24 px-6 bg-secondary/30">
       <div className="max-w-2xl mx-auto">
-        <div className="flex items-center gap-3 mb-6">
-          <Mail className="w-5 h-5 text-primary" />
-          <h2 className="text-sm tracking-[0.3em] uppercase text-primary font-body">
-            Contact
-          </h2>
+        <div className="flex items-center justify-between gap-6 mb-6">
+          <div className="flex items-center gap-3">
+            <Mail className="w-5 h-5 text-primary" />
+            <h2 className="text-sm tracking-[0.3em] uppercase text-primary font-body">
+              Contact
+            </h2>
+          </div>
+          <div className="flex gap-3">
+            {socialLinks.map((link) => (
+              <a
+                key={link.name}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-9 h-9 rounded-full bg-background flex items-center justify-center text-muted-foreground hover:text-primary transition-colors"
+                aria-label={link.name}
+                title={link.name}
+              >
+                <link.icon className="w-4 h-4" />
+              </a>
+            ))}
+          </div>
         </div>
         <h3 className="font-display text-3xl text-foreground mb-4">
           Get in Touch
