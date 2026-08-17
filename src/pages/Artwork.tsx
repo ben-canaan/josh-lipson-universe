@@ -36,7 +36,7 @@ const Artwork = () => {
           </h2>
           
           <p className="text-lg text-muted-foreground font-body mb-12 leading-relaxed max-w-2xl">
-            A gallery of visual work exploring texture, symbol, and the interplay of ancient and modern.
+            A gallery of visual work exploring color, symbol, and the interplay of ancient and modern.
           </p>
           
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
