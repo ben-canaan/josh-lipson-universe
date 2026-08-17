@@ -4,11 +4,11 @@ import { Brain, BookOpen, MessageCircle, GraduationCap, ExternalLink } from "luc
 
 const speakingTopics = [
   "Psychedelics and mental health",
-  "Post-psychedelic difficulty and adverse effects",
-  "Psychedelics and spirituality",
-  "Jewish genetic history and ancient DNA",
-  "Meaning-making and the psychology of consciousness",
-  "Cross-cultural approaches to mental health",
+  "Post-psychedelic difficulties and adverse effects",
+  "Psychedelics and Jewish spirituality",
+  "Jewish DNA and history / the historical genomics revolution",
+  "The psychology of meaning-making",
+  "Selfhood and mental health in cross-cultural perspective",
 ];
 
 const Services = () => {
@@ -25,16 +25,16 @@ const Services = () => {
             </h1>
             <div className="w-16 h-px bg-primary/30 mb-6" />
             <p className="text-muted-foreground font-body text-lg leading-relaxed">
-              Clinical practice, research consultation, speaking, and teaching — grounded in depth, meaning, and human connection.
+              Clinical practice, research consultation, speaking, and teaching — rooted in depth, the meaning-making, and human connection.
             </p>
           </div>
 
-          {/* Private Practice */}
+          {/* Psychotherapy */}
           <section className="mb-16 pb-16 border-b border-border/50">
             <div className="flex items-center gap-3 mb-4">
               <Brain className="w-5 h-5 text-primary" />
               <h2 className="text-sm tracking-[0.3em] uppercase text-primary font-body">
-                Private Practice
+                Psychotherapy
               </h2>
             </div>
             <p className="text-muted-foreground font-body leading-relaxed mb-6 max-w-2xl">
@@ -62,7 +62,7 @@ const Services = () => {
               </h2>
             </div>
             <p className="text-muted-foreground font-body leading-relaxed max-w-2xl">
-              Research consultation on psychedelics, consciousness studies, and cross-cultural approaches to mental health. Available to advise on study design, adverse-event frameworks, and the integration of spiritual and religious context into clinical and research work.
+              Research consultation on psychedelics, clinical implementation, and cross-cultural approaches to mental health. Available to advise on study design, adverse-event frameworks, and the integration of spiritual and religious context into clinical and research work.
             </p>
           </section>
 
