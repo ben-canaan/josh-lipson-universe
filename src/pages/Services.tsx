@@ -38,7 +38,7 @@ const Services = () => {
               </h2>
             </div>
             <p className="text-muted-foreground font-body leading-relaxed mb-6 max-w-2xl">
-              Clinical psychological services grounded in depth, meaning, and human connection. Specializing in preparation, integration, and meaning-making around psychedelic and spiritual experiences.
+              Clinical psychological services tailored to your specific needs, with an orientation toward depth and collaborative exploration. Specializing in preparation, integration, and meaning-making around psychedelic and spiritual experiences, as well as finding footing in an unpredictable world.
             </p>
             <a
               href="https://drjoshlipson.com"
