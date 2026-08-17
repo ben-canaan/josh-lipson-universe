@@ -8,6 +8,7 @@ const navItems = [
   { label: "Essays & Projects", href: "/essays" },
   { label: "Poetry", href: "/poetry" },
   { label: "Artwork", href: "/artwork" },
+  { label: "Services", href: "/services" },
   { label: "Contact", href: "/#contact" },
 ];
 
