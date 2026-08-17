@@ -3,7 +3,7 @@ import { ArrowRight } from "lucide-react";
 
 const Services = () => {
   return (
-    <section className="py-16 px-6 bg-secondary/30">
+    <section className="py-24 px-6 bg-secondary/30">
       <div className="max-w-3xl mx-auto text-center">
         <h2 className="text-sm tracking-[0.3em] uppercase text-primary font-body mb-4">
           Work With Me
