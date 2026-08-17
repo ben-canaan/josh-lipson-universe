@@ -1,7 +1,7 @@
 import portraitImage from "@/assets/portrait.webp";
 const About = () => {
   return (
-    <section id="about" className="pt-8 pb-24 px-6">
+    <section id="about" className="pt-16 pb-24 px-6">
       <div className="max-w-4xl mx-auto">
         <div className="grid md:grid-cols-[1fr,2fr] gap-12 md:gap-16">
           {/* Left column - Photo and Section title */}
