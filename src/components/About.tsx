@@ -37,7 +37,7 @@ const About = () => {
             </p>
             
             <p className="font-body">
-              I have an undergraduate background in the humanities [Harvard, AB, Near Eastern Languages and Civilizations], and am passionate about relating to human civilizational expression across space and time, in a full-bodied way. Ask me about <span className="italic">Şeb-i Arus</span>, bossa nova, Semitic grammar, or the Austronesian migrations.
+              I have an undergraduate background in the humanities from Harvard, and am passionate about relating to human civilizational expression across space and time, in a full-bodied way. Ask me about <span className="italic">Şeb-i Arus</span>, bossa nova, Semitic grammar, or the Austronesian migrations.
             </p>
             
             <p className="font-body">
