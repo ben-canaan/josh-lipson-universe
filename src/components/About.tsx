@@ -29,7 +29,7 @@ const About = () => {
             </p>
             
             <p className="font-body">
-              Seeking thoughtful collaborations in this space.
+              Seeking thoughtful collaborations in this space. I completed my doctoral training in clinical psychology at Columbia's Spirituality Mind Body Institute, and am currently a postdoctoral research fellow at the Emory Center for Psychedelics and Spirituality.
             </p>
             
             <p className="font-body">
@@ -37,19 +37,19 @@ const About = () => {
             </p>
             
             <p className="font-body">
-              I have an undergraduate background in the humanities, and am passionate about relating to human civilizational expression across space and time, in a full-bodied way. Ask me about <span className="italic">Şeb-i Arus</span>, bossa nova, Semitic grammar, or the Austronesian migrations.
+              I have an undergraduate background in the humanities [Harvard, AB, Near Eastern Languages and Civilizations], and am passionate about relating to human civilizational expression across space and time, in a full-bodied way. Ask me about <span className="italic">Şeb-i Arus</span>, bossa nova, Semitic grammar, or the Austronesian migrations.
             </p>
             
             <p className="font-body">
               I also moonlight as a historian, with a focus on Jewish affairs, ideas, and genes from the Iron Age to the 20th century, and am the co-founder of the <a href="https://jewishgeneticdiscovery.org" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary/80 underline underline-offset-4 decoration-primary/30 hover:decoration-primary/60 transition-colors">Jewish Genetic Discovery Foundation</a>.
             </p>
             
-            <p className="font-body">
+            <p className="font-body text-muted-foreground">
               I speak enough Hebrew, Spanish, Arabic, and Portuguese to get me both into and out of trouble, and I also write poems and songs.
             </p>
-            
-            <p className="font-body">
-              I publish regularly on all these topics and more at <a href="https://whitmanic.substack.com" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary/80 underline underline-offset-4 decoration-primary/30 hover:decoration-primary/60 transition-colors">Whit·manic</a>.
+
+            <p className="font-body text-muted-foreground">
+              I publish regularly on all these topics and more at <a href="https://whitmanic.substack.com/" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary/80 underline underline-offset-4 decoration-primary/30 hover:decoration-primary/60 transition-colors">Whit·manic</a>.
             </p>
           </div>
         </div>
