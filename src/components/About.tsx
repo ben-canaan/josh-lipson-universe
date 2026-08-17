@@ -44,8 +44,12 @@ const About = () => {
               I also moonlight as a historian, with a focus on Jewish affairs, ideas, and genes from the Iron Age to the 20th century, and am the co-founder of the <a href="https://jewishgeneticdiscovery.org" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary/80 underline underline-offset-4 decoration-primary/30 hover:decoration-primary/60 transition-colors">Jewish Genetic Discovery Foundation</a>.
             </p>
             
-            <p className="font-body text-muted-foreground">
+            <p className="font-body">
               I speak enough Hebrew, Spanish, Arabic, and Portuguese to get me both into and out of trouble, and I also write poems and songs.
+            </p>
+            
+            <p className="font-body">
+              I publish regularly on all these topics and more at <a href="https://whitmanic.substack.com" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary/80 underline underline-offset-4 decoration-primary/30 hover:decoration-primary/60 transition-colors">Whit·manic</a>.
             </p>
           </div>
         </div>
