@@ -339,11 +339,11 @@ const Poetry = () => {
           </div>
 
           <h2 className="font-display text-4xl md:text-5xl text-foreground mb-8 leading-tight">
-            Verses & Songs
+            Verse & Song
           </h2>
 
           <p className="text-lg text-muted-foreground font-body mb-6 leading-relaxed max-w-2xl">
-            A collection of poems and songs exploring consciousness, longing, history, and the sacred.
+            A collection of lyrics exploring consciousness, longing, history, and the sacred.
           </p>
 
           <p className="text-base text-muted-foreground font-body mb-16 leading-relaxed max-w-2xl">
