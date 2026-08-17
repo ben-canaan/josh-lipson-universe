@@ -24,12 +24,12 @@ const About = () => {
           
           {/* Right column - Content */}
           <div className="space-y-6 text-lg leading-relaxed text-foreground/85">
-            <p className="font-display text-2xl md:text-3xl text-foreground leading-snug">
-              Can we leverage the "gratuitous grace" of psychedelic chemistry to make people feel more whole, and more at home in the universe? Can we do it humbly?
+            <p className="font-body">
+              Can we leverage the "gratuitous grace" of psychedelic chemistry to make people feel more whole, and more at home in the universe? Can we do it humbly? Seeking thoughtful collaborations in this space. 
             </p>
             
             <p className="font-body">
-              Seeking thoughtful collaborations in this space. I completed my doctoral training in clinical psychology at Columbia's Spirituality Mind Body Institute, and am currently a postdoctoral research fellow at the Emory Center for Psychedelics and Spirituality.
+              I completed my doctoral training in clinical psychology at Columbia's Spirituality Mind Body Institute, and am currently a postdoctoral research fellow at the Emory Center for Psychedelics and Spirituality.
             </p>
             
             <p className="font-body">
@@ -44,11 +44,11 @@ const About = () => {
               I also moonlight as a historian, with a focus on Jewish affairs, ideas, and genes from the Iron Age to the 20th century, and am the co-founder of the <a href="https://jewishgeneticdiscovery.org" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary/80 underline underline-offset-4 decoration-primary/30 hover:decoration-primary/60 transition-colors">Jewish Genetic Discovery Foundation</a>.
             </p>
             
-            <p className="font-body text-muted-foreground">
+            <p className="font-body">
               I speak enough Hebrew, Spanish, Arabic, and Portuguese to get me both into and out of trouble, and I also write poems and songs.
             </p>
 
-            <p className="font-body text-muted-foreground">
+            <p className="font-body">
               I publish regularly on all these topics and more at <a href="https://whitmanic.substack.com/" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary/80 underline underline-offset-4 decoration-primary/30 hover:decoration-primary/60 transition-colors">Whit·manic</a>.
             </p>
           </div>
