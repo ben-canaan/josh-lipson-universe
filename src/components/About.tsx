@@ -1,7 +1,7 @@
 import portraitImage from "@/assets/portrait.webp";
 const About = () => {
   return (
-    <section id="about" className="pt-16 pb-24 px-6">
+    <section id="about" className="py-24 px-6">
       <div className="max-w-4xl mx-auto">
         <div className="grid md:grid-cols-[1fr,2fr] gap-12 md:gap-16">
           {/* Left column - Photo and Section title */}
@@ -37,7 +37,7 @@ const About = () => {
             </p>
             
             <p className="font-body">
-              I have an undergraduate background in the humanities from Harvard, and am passionate about relating to human civilizational expression across space and time, in a full-bodied way. Ask me about <span className="italic">Şeb-i Arus</span>, bossa nova, Semitic grammar, or the Austronesian migrations.
+              I have an undergraduate background in the humanities [Harvard, AB, Near Eastern Languages and Civilizations], and am passionate about relating to human civilizational expression across space and time, in a full-bodied way. Ask me about <span className="italic">Şeb-i Arus</span>, bossa nova, Semitic grammar, or the Austronesian migrations.
             </p>
             
             <p className="font-body">
