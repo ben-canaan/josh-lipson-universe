@@ -1,14 +1,12 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import { Brain, BookOpen, MessageCircle, GraduationCap, ExternalLink } from "lucide-react";
+import { Brain, Mic, MessagesSquare, Users, GraduationCap, ExternalLink } from "lucide-react";
 
 const speakingTopics = [
-  "Psychedelics and mental health",
-  "Post-psychedelic difficulties and adverse effects",
-  "Psychedelics and Jewish spirituality",
-  "Jewish DNA and history / the historical genomics revolution",
-  "The psychology of meaning-making",
-  "Selfhood and mental health in cross-cultural perspective",
+  "Psychedelics, spirituality, and psychological transformation",
+  "Jewish genetics, ancestry, and deep history",
+  "Meaning and purpose under conditions of radical unpredictability",
+  "Consciousness and mental health in cross-cultural perspective",
 ];
 
 const Services = () => {
@@ -20,12 +18,12 @@ const Services = () => {
 
           {/* Header */}
           <div className="mb-16">
-            <h1 className="font-display text-4xl md:text-5xl text-foreground mb-4">
+            <h1 className="font-display text-4xl md:text-5xl text-foreground mb-6">
               Work With Me
             </h1>
             <div className="w-16 h-px bg-primary/30 mb-6" />
-            <p className="text-muted-foreground font-body text-lg leading-relaxed">
-              Clinical practice, research consultation, speaking, and teaching — rooted in depth, the meaning-making, and human connection.
+            <p className="text-muted-foreground font-body text-lg leading-relaxed max-w-2xl">
+              I welcome opportunities that are intellectually serious, creatively alive, and oriented toward genuine human flourishing. If you think my work might be a good fit for your community or project, I'd be glad to hear from you.
             </p>
           </div>
 
@@ -38,7 +36,7 @@ const Services = () => {
               </h2>
             </div>
             <p className="text-muted-foreground font-body leading-relaxed mb-6 max-w-2xl">
-              Clinical psychological services tailored to your specific needs, with an orientation toward depth and collaborative exploration. Specializing in preparation, integration, and meaning-making around psychedelic and spiritual experiences, as well as finding footing in an unpredictable world.
+              I maintain a private psychotherapy practice in New York, with particular interests in psychedelic integration, spirituality, meaning, identity, and psychological growth. If you're interested in working together clinically, please visit my practice website.
             </p>
             <a
               href="https://drjoshlipson.com"
@@ -47,35 +45,22 @@ const Services = () => {
               className="inline-flex items-center gap-2 text-foreground hover:text-primary transition-colors font-body group"
             >
               <span className="border-b border-foreground/20 group-hover:border-primary pb-1">
-                Visit my practice site
+                Visit the practice site
               </span>
               <ExternalLink className="w-4 h-4" />
             </a>
           </section>
 
-          {/* Consulting */}
-          <section className="mb-16 pb-16 border-b border-border/50">
-            <div className="flex items-center gap-3 mb-4">
-              <MessageCircle className="w-5 h-5 text-primary" />
-              <h2 className="text-sm tracking-[0.3em] uppercase text-primary font-body">
-                Consulting
-              </h2>
-            </div>
-            <p className="text-muted-foreground font-body leading-relaxed max-w-2xl">
-              Research consultation on psychedelics, clinical implementation, and cross-cultural approaches to mental health. Available to advise on study design, adverse-event frameworks, and the integration of spiritual and religious context into clinical and research work.
-            </p>
-          </section>
-
           {/* Speaking */}
           <section className="mb-16 pb-16 border-b border-border/50">
             <div className="flex items-center gap-3 mb-4">
-              <BookOpen className="w-5 h-5 text-primary" />
+              <Mic className="w-5 h-5 text-primary" />
               <h2 className="text-sm tracking-[0.3em] uppercase text-primary font-body">
                 Speaking
               </h2>
             </div>
             <p className="text-muted-foreground font-body leading-relaxed mb-6 max-w-2xl">
-              Available for talks, panels, and public engagements on topics including:
+              I give lectures, keynotes, scholar-in-residence weekends, workshops, and public conversations. Recent and recurring themes include:
             </p>
             <ul className="grid sm:grid-cols-2 gap-3 mb-6">
               {speakingTopics.map((topic) => (
@@ -87,23 +72,54 @@ const Services = () => {
                 </li>
               ))}
             </ul>
-            <p className="text-muted-foreground font-body text-sm">
-              Contact me to discuss a talk, panel, or event.
+            <p className="text-muted-foreground font-body leading-relaxed max-w-2xl">
+              I'm especially interested in engagements that leave room for conversation as well as presentation.
             </p>
           </section>
 
-          {/* Courses and Academic Guidance */}
-          <section>
+          {/* Conversations & Media */}
+          <section className="mb-16 pb-16 border-b border-border/50">
             <div className="flex items-center gap-3 mb-4">
-              <GraduationCap className="w-5 h-5 text-primary" />
+              <MessagesSquare className="w-5 h-5 text-primary" />
               <h2 className="text-sm tracking-[0.3em] uppercase text-primary font-body">
-                Courses
+                Conversations & Media
               </h2>
             </div>
             <p className="text-muted-foreground font-body leading-relaxed max-w-2xl">
-              One-on-one tutoring in modern and classical Hebrew. Academic guidance in psychology, history, and the humanities. Boutique course offerings (e.g. "Psychedelic Spirituality", "Hebrew for Mystics and Poets") coming soon.
+              I enjoy thoughtful conversations more than polished performances. I'm happy to consider podcasts, interviews, documentaries, panels, essays, and other opportunities that help bring difficult or fascinating ideas into public conversation.
             </p>
           </section>
+
+          {/* Advisory & Collaboration */}
+          <section className="mb-16 pb-16 border-b border-border/50">
+            <div className="flex items-center gap-3 mb-4">
+              <Users className="w-5 h-5 text-primary" />
+              <h2 className="text-sm tracking-[0.3em] uppercase text-primary font-body">
+                Advisory & Collaboration
+              </h2>
+            </div>
+            <p className="text-muted-foreground font-body leading-relaxed max-w-2xl">
+              I occasionally advise organizations, researchers, founders, writers, and institutions working at the intersection of psychology, psychedelics, spirituality, Jewish history, public scholarship, and culture. I'm most interested in projects that require careful thinking, synthesis across disciplines, or long-range strategic perspective.
+            </p>
+          </section>
+
+          {/* Teaching */}
+          <section className="mb-16 pb-16 border-b border-border/50">
+            <div className="flex items-center gap-3 mb-4">
+              <GraduationCap className="w-5 h-5 text-primary" />
+              <h2 className="text-sm tracking-[0.3em] uppercase text-primary font-body">
+                Teaching
+              </h2>
+            </div>
+            <p className="text-muted-foreground font-body leading-relaxed max-w-2xl">
+              I periodically develop seminars, workshops, and educational offerings of my own, and I'm always interested in conversations with institutions that value intellectually adventurous teaching.
+            </p>
+          </section>
+
+          {/* Closing note */}
+          <p className="text-muted-foreground font-body italic leading-relaxed max-w-2xl">
+            If you're reaching out with something that doesn't fit neatly into one of these categories, please don't let that stop you. Some of the most meaningful opportunities begin with an email that starts, "This is a little unusual…"
+          </p>
 
         </div>
       </main>
