@@ -29,7 +29,7 @@ const About = () => {
             </p>
             
             <p className="font-body">
-              I completed my doctoral training in clinical psychology at Columbia's Spirituality Mind Body Institute, and am currently a postdoctoral research fellow at the Emory Center for Psychedelics and Spirituality.
+              I completed my doctoral training in clinical psychology at Columbia's Spirituality Mind Body Institute, and am currently a postdoctoral research fellow at the Emory Center for Psychedelics and Spirituality. I also serve on the Board of Advisors for the Psychedelic Yoga Research Collective.
             </p>
             
             <p className="font-body">
