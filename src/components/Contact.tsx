@@ -72,8 +72,13 @@ const Contact = () => {
         <h3 className="font-display text-3xl text-foreground mb-4">
           Get in Touch
         </h3>
-        <p className="text-muted-foreground font-body mb-10 leading-relaxed">
+        <p className="text-muted-foreground font-body mb-4 leading-relaxed">
           Whether you're interested in working together, have a question, or just want to say hello — I'd love to hear from you.
+        </p>
+        <p className="text-muted-foreground font-body text-sm mb-10 leading-relaxed">
+          For psychotherapy inquiries, please use{" "}
+          <a href="https://drjoshlipson.com" target="_blank" rel="noopener noreferrer" className="text-primary underline underline-offset-4 decoration-primary/30 hover:decoration-primary/60">drjoshlipson.com</a>{" "}
+          instead, and don't include personal health details in this form.
         </p>
 
         {submitted ? (

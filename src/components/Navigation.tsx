@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
-import bannerImage from "@/assets/banner.png";
+import bannerImage from "@/assets/banner.jpg";
 
 const navItems = [
   { label: "About", href: "/#about" },
   { label: "Essays & Projects", href: "/essays" },
   { label: "Poetry", href: "/poetry" },
   { label: "Artwork", href: "/artwork" },
+  { label: "Speaking", href: "/speaking" },
   { label: "Services", href: "/services" },
   { label: "Contact", href: "/#contact" },
 ];
@@ -112,18 +113,22 @@ const Navigation = () => {
             to="/"
             className="text-lg text-foreground hover:text-primary transition-colors"
             style={{ fontFamily: "'Noto Sans Arabic', sans-serif" }}
+            lang="ar"
+            dir="rtl"
+            title="Singular, in the form of the plural"
+            aria-label="Josh Lipson, home"
           >
             مفرد بصيغة الجمع
           </Link>
 
           {/* Desktop navigation */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden lg:flex items-center gap-7">
             {navItems.map(renderNavLink)}
           </div>
 
           {/* Mobile menu button */}
           <button
-            className="md:hidden p-2 text-foreground"
+            className="lg:hidden p-2 text-foreground"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -133,7 +138,7 @@ const Navigation = () => {
 
         {/* Mobile menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden absolute top-full left-0 right-0 bg-background/95 backdrop-blur-md border-b border-border shadow-elevated">
+          <div className="lg:hidden absolute top-full left-0 right-0 bg-background/95 backdrop-blur-md border-b border-border shadow-elevated">
             <div className="px-6 py-6 space-y-4">
               {navItems.map(renderMobileNavLink)}
             </div>

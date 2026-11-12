@@ -25,17 +25,21 @@ const About = () => {
           {/* Right column - Content */}
           <div className="space-y-6 text-lg leading-relaxed text-foreground/85">
             <p className="font-body">
-              Can we leverage the "gratuitous grace" of psychedelic chemistry to make people feel more whole, and more at home in the universe? Can we do it humbly? Seeking thoughtful collaborations in this space.
+              Can we leverage the "gratuitous grace" of psychedelic chemistry to make people feel more whole, and more at home in the universe? Can we do it humbly?
             </p>
-            
+
             <p className="font-body">
-              I completed my doctoral training in clinical psychology at Columbia's Spirituality Mind Body Institute, and am currently a postdoctoral research fellow at the Emory Center for Psychedelics and Spirituality. I also serve on the Board of Advisors for the Psychedelic Yoga Research Collective.
+              I completed my doctoral training in clinical psychology at Columbia's Spirituality Mind Body Institute, and a postdoctoral fellowship at the Emory Center for Psychedelics and Spirituality. After eight years in universities, I now work on my own terms, from New York. I also serve on the Board of Advisors for the Psychedelic Yoga Research Collective.
             </p>
-            
+
+            <p className="font-body">
+              I'm setting up a private psychotherapy practice in New York, for people navigating psychedelic experiences, spiritual and existential questions, crises of belief, and other forms of intense or destabilizing inner weather. It opens in late 2026, and the waitlist is at <a href="https://drjoshlipson.com" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary/80 underline underline-offset-4 decoration-primary/30 hover:decoration-primary/60 transition-colors">drjoshlipson.com</a>.
+            </p>
+
             <p className="font-body">
               I'm interested in meaning-making, phenomenology of consciousness, the interplay between "nebulosity" and "pattern", antifragility, predictive processing, "preconquest consciousness" and "the breakdown of the bicameral mind", and examining today's idioms of distress in cross-cultural context.
             </p>
-            
+
             <p className="font-body">
               I have an undergraduate background in the humanities from Harvard, and am passionate about relating to human civilizational expression across space and time, in a full-bodied way. Ask me about <span className="italic">Şeb-i Arus</span>, bossa nova, Semitic grammar, or the Austronesian migrations.
             </p>
@@ -49,7 +53,7 @@ const About = () => {
             </p>
 
             <p className="font-body">
-              I publish regularly on all these topics and more at <a href="https://whitmanic.substack.com/" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary/80 underline underline-offset-4 decoration-primary/30 hover:decoration-primary/60 transition-colors">Whit·manic</a>.
+              I publish regularly on all these topics and more at <a href="https://whitmanic.substack.com/" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary/80 underline underline-offset-4 decoration-primary/30 hover:decoration-primary/60 transition-colors">Whit·manic</a>, and I'm editing <span className="italic">Trippers and Askers</span>, an anthology of world spiritual classics for the psychedelic experience.
             </p>
           </div>
         </div>

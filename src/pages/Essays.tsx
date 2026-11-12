@@ -4,6 +4,22 @@ import { ExternalLink } from "lucide-react";
 
 const essays = [
   {
+    title: "Out of the institution, into the (friendly) abyss",
+    subtitle: "I'm leaving academia and going into practice.",
+    date: "September 2026",
+    publication: "Whitmanic",
+    link: "https://whitmanic.substack.com/p/out-of-the-institution-into-the-friendly",
+    tags: ["psychology", "vocation"],
+  },
+  {
+    title: "Rosh HaShana, Yom Kippur, and the Political Compass",
+    subtitle: "Liturgical poetry across the four quadrants.",
+    date: "September 2026",
+    publication: "Whitmanic",
+    link: "https://whitmanic.substack.com/p/rosh-hashana-yom-kippur-and-the-political",
+    tags: ["religion", "poetry", "Hebrew"],
+  },
+  {
     title: "Sorry to burst your bubble?",
     subtitle: "Metaphor, placebo, and the ethics of disenchantment.",
     date: "May 2026",

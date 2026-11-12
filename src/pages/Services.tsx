@@ -1,13 +1,9 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import { Brain, Mic, MessagesSquare, Users, GraduationCap, ExternalLink } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Brain, Mic, MessagesSquare, Users, GraduationCap, ExternalLink, ArrowRight } from "lucide-react";
+import { speakingTopics } from "@/data/speaking";
 
-const speakingTopics = [
-  "Psychedelics, spirituality, and psychological transformation",
-  "Jewish genetics, ancestry, and deep history",
-  "Meaning and purpose under conditions of radical unpredictability",
-  "Consciousness and mental health in cross-cultural perspective",
-];
 
 const Services = () => {
   return (
@@ -36,7 +32,7 @@ const Services = () => {
               </h2>
             </div>
             <p className="text-muted-foreground font-body leading-relaxed mb-6 max-w-2xl">
-              I maintain a private psychotherapy practice in New York, with particular interests in psychedelic integration, spirituality, meaning, identity, and psychological growth. If you're interested in working together clinically, please visit my practice website.
+              I'm setting up a private psychotherapy practice in New York, opening in late 2026, with particular interests in psychedelic integration, spirituality, meaning, identity, and psychological growth. If you're interested in working together clinically, please join the waitlist on my practice website.
             </p>
             <a
               href="https://drjoshlipson.com"
@@ -72,9 +68,15 @@ const Services = () => {
                 </li>
               ))}
             </ul>
-            <p className="text-muted-foreground font-body leading-relaxed max-w-2xl">
-              I'm especially interested in engagements that leave room for conversation as well as presentation.
-            </p>
+            <Link
+              to="/speaking"
+              className="inline-flex items-center gap-2 text-foreground hover:text-primary transition-colors font-body group"
+            >
+              <span className="border-b border-foreground/20 group-hover:border-primary pb-1">
+                Speaking topics, bio, and past appearances
+              </span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
           </section>
 
           {/* Conversations & Media */}
