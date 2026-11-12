@@ -20,22 +20,6 @@ const essays = [
     tags: ["religion", "poetry", "Hebrew"],
   },
   {
-    title: "The veil is thin with these people",
-    subtitle: "From the Unit, #4.",
-    date: "August 2026",
-    publication: "Whitmanic",
-    link: "https://whitmanic.substack.com/p/the-veil-is-thin-with-these-people",
-    tags: ["psychology", "From the Unit"],
-  },
-  {
-    title: "The view from Fatma Hanım's house",
-    subtitle: "September-October 2014.",
-    date: "July 2026",
-    publication: "Whitmanic",
-    link: "https://whitmanic.substack.com/p/the-view-from-fatma-hanms-house",
-    tags: ["travel", "Turkey"],
-  },
-  {
     title: "Sorry to burst your bubble?",
     subtitle: "Metaphor, placebo, and the ethics of disenchantment.",
     date: "May 2026",
