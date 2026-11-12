@@ -31,7 +31,9 @@ const page = (path, meta, { index = true } = {}) => {
 };
 
 for (const [path, meta] of Object.entries(routeMeta)) {
-  const file = path === "/" ? join(dist, "index.html") : join(dist, path, "index.html");
+  // "/speaking" is written as speaking.html so Netlify serves it at /speaking
+  // itself, rather than redirecting to /speaking/ (which a folder would do).
+  const file = path === "/" ? join(dist, "index.html") : join(dist, `${path}.html`);
   mkdirSync(dirname(file), { recursive: true });
   writeFileSync(file, page(path, meta));
 }
