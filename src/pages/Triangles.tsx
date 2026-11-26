@@ -14,7 +14,7 @@ import {
 const STORAGE_KEY = "semitic-triangles:game";
 const ESSAY_URL = "https://whitmanic.substack.com/p/semitic-triangles-the-most-obscure";
 const FONTS_HREF =
-  "https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@500&family=Noto+Sans+Phoenician&family=Noto+Serif+Hebrew:wght@500&display=swap";
+  "https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@500&family=Noto+Sans+Phoenician&family=Noto+Sans+Syriac:wght@500&family=Noto+Serif+Hebrew:wght@500&display=swap";
 
 type Camera = { x: number; y: number; z: number };
 const MIN_Z = 18;
@@ -710,7 +710,7 @@ const Composer = (p: ComposerProps) => {
         </button>
       </div>
       <p className="text-[11px] text-muted-foreground leading-snug">
-        Keyboard: type in Hebrew or Arabic{game.alphabet === "canaanite" && <>, or Latin (x = ḥ, T = ṭ, c = ṣ, S = š, e = ʿ, a = ʾ)</>}. Enter places, Tab turns, Esc cancels.
+        Keyboard: type in Hebrew, Syriac or Arabic{game.alphabet === "canaanite" && <>, or Latin (x = ḥ, T = ṭ, c = ṣ, S = š, e = ʿ, a = ʾ)</>}. Enter places, Tab turns, Esc cancels.
       </p>
     </div>
   );

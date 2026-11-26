@@ -55,14 +55,14 @@ export const triAt = (x: number, y: number): Tri => {
 // --------------------------------------------------------------- alphabets
 
 export type AlphabetId = "canaanite" | "arabic";
-export type ScriptId = "hebrew" | "paleo" | "arabic";
+export type ScriptId = "hebrew" | "paleo" | "syriac" | "arabic";
 
 type Letter = { id: string; translit: string; keys?: string[] };
 
 // Letters are stored by their square-Hebrew form (or Arabic form), and
-// drawn in whichever script the players choose. Paleo-Hebrew/Phoenician and
-// square Hebrew are the same 22-letter alphabet, so a game can switch
-// between them at any time.
+// drawn in whichever script the players choose. Paleo-Hebrew/Phoenician,
+// square Hebrew and Syriac are the same 22-letter alphabet in the same
+// order, so a game can switch between them at any time.
 const CANAANITE: Letter[] = [
   { id: "א", translit: "ʾ", keys: ["a", "'"] },
   { id: "ב", translit: "b", keys: ["b"] },
@@ -90,6 +90,14 @@ const CANAANITE: Letter[] = [
 
 const PHOENICIAN = Array.from({ length: 22 }, (_, i) => String.fromCodePoint(0x10900 + i));
 
+// ʾālap̄ to taw, skipping the Unicode block's extra letters.
+const SYRIAC = [
+  0x710, 0x712, 0x713, 0x715, 0x717, 0x718, 0x719, 0x71a, 0x71b, 0x71d, 0x71f,
+  0x720, 0x721, 0x722, 0x723, 0x725, 0x726, 0x728, 0x729, 0x72a, 0x72b, 0x72c,
+].map((c) => String.fromCodePoint(c));
+
+const CANAANITE_GLYPHS: Partial<Record<ScriptId, string[]>> = { paleo: PHOENICIAN, syriac: SYRIAC };
+
 const ARABIC: Letter[] = [
   ["ء", "ʾ"], ["ب", "b"], ["ت", "t"], ["ث", "ṯ"], ["ج", "j"], ["ح", "ḥ"], ["خ", "ḫ"],
   ["د", "d"], ["ذ", "ḏ"], ["ر", "r"], ["ز", "z"], ["س", "s"], ["ش", "š"], ["ص", "ṣ"],
@@ -98,27 +106,30 @@ const ARABIC: Letter[] = [
 ].map(([id, translit]) => ({ id, translit }));
 
 export const ALPHABETS: Record<AlphabetId, { label: string; letters: Letter[]; scripts: ScriptId[] }> = {
-  canaanite: { label: "Hebrew / Paleo-Hebrew (22)", letters: CANAANITE, scripts: ["paleo", "hebrew"] },
+  canaanite: { label: "Paleo-Hebrew, Hebrew, Syriac (22)", letters: CANAANITE, scripts: ["paleo", "hebrew", "syriac"] },
   arabic: { label: "Arabic (28)", letters: ARABIC, scripts: ["arabic"] },
 };
 
 export const SCRIPT_LABEL: Record<ScriptId, string> = {
   paleo: "Paleo-Hebrew",
-  hebrew: "Square Hebrew",
+  hebrew: "Hebrew",
+  syriac: "Syriac",
   arabic: "Arabic",
 };
 
 export const SCRIPT_FONT: Record<ScriptId, string> = {
   paleo: "'Noto Sans Phoenician', 'Segoe UI Historic', sans-serif",
   hebrew: "'Noto Serif Hebrew', 'Times New Roman', serif",
+  syriac: "'Noto Sans Syriac', 'Estrangelo Edessa', sans-serif",
   arabic: "'Noto Naskh Arabic', 'Noto Sans Arabic', serif",
 };
 
 /** How a stored letter is drawn in a script. */
 export const glyph = (id: string, script: ScriptId) => {
-  if (script !== "paleo") return id;
+  const glyphs = CANAANITE_GLYPHS[script];
+  if (!glyphs) return id;
   const i = CANAANITE.findIndex((l) => l.id === id);
-  return i < 0 ? id : PHOENICIAN[i];
+  return i < 0 ? id : glyphs[i];
 };
 
 export const translit = (id: string, alphabet: AlphabetId) =>
@@ -133,8 +144,10 @@ export const letterFromKey = (key: string, alphabet: AlphabetId): string | null 
   if (alphabet === "canaanite") {
     const k = HEBREW_FINALS[key] ?? key;
     if (letters.some((l) => l.id === k)) return k;
-    const p = PHOENICIAN.indexOf(key);
-    if (p >= 0) return letters[p].id;
+    for (const glyphs of Object.values(CANAANITE_GLYPHS)) {
+      const p = glyphs.indexOf(key);
+      if (p >= 0) return letters[p].id;
+    }
     // Exact match first so that "S" (shin) and "s" (samekh) stay distinct.
     const exact = letters.find((l) => l.keys?.includes(key));
     if (exact) return exact.id;
