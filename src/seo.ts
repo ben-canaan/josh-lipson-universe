@@ -30,6 +30,11 @@ export const routeMeta: Record<string, RouteMeta> = {
     description:
       "Lectures, scholar-in-residence weekends, podcasts, and panels on psychedelics and spirituality, Jewish genetics and deep history, and meaning under uncertainty.",
   },
+  "/triangles": {
+    title: "Semitic Triangles | Josh Lipson",
+    description:
+      "Play Semitic Triangles, a word game built on the three-letter root: fill an endless lattice of triangles with Hebrew, Arabic, and Paleo-Hebrew roots.",
+  },
   "/services": {
     title: "Work With Me | Josh Lipson",
     description:
