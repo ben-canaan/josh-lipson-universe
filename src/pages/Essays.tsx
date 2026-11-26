@@ -1,6 +1,7 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import { ExternalLink } from "lucide-react";
+import { Link } from "react-router-dom";
+import { ArrowRight, ExternalLink } from "lucide-react";
 
 const essays = [
   {
@@ -121,6 +122,13 @@ const academicWork = [
 ];
 
 const projects = [
+  {
+    title: "Semitic Triangles",
+    description:
+      "A word game built on the three-letter Semitic root: fill an endless lattice of triangles with Hebrew, Arabic, and Paleo-Hebrew roots, each corner a letter shared by its neighbors. Play alone, pass and play, or trade moves by link.",
+    link: "/triangles",
+    linkLabel: "Play the game",
+  },
   {
     title: "Post-Psychedelic Challenges Study",
     description: "An international multi-site study examining the nature, prevalence, and resolution of difficulties that persist after psychedelic experiences. Launched in summer 2025 through the Emory Center for Psychedelics and Spirituality, led by Dr. Roman Palitsky. Currently the largest dataset of its kind.",
@@ -247,17 +255,29 @@ const Essays = () => {
                   <p className="text-muted-foreground font-body leading-relaxed mb-4">
                     {project.description}
                   </p>
-                  <a
-                    href={project.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-sm font-body text-foreground hover:text-primary transition-colors group"
-                  >
-                    <span className="border-b border-foreground/20 group-hover:border-primary pb-0.5">
-                      {project.linkLabel}
-                    </span>
-                    <ExternalLink className="w-3 h-3" />
-                  </a>
+                  {project.link.startsWith("/") ? (
+                    <Link
+                      to={project.link}
+                      className="inline-flex items-center gap-2 text-sm font-body text-foreground hover:text-primary transition-colors group"
+                    >
+                      <span className="border-b border-foreground/20 group-hover:border-primary pb-0.5">
+                        {project.linkLabel}
+                      </span>
+                      <ArrowRight className="w-3 h-3" />
+                    </Link>
+                  ) : (
+                    <a
+                      href={project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-sm font-body text-foreground hover:text-primary transition-colors group"
+                    >
+                      <span className="border-b border-foreground/20 group-hover:border-primary pb-0.5">
+                        {project.linkLabel}
+                      </span>
+                      <ExternalLink className="w-3 h-3" />
+                    </a>
+                  )}
                 </div>
               ))}
             </div>
