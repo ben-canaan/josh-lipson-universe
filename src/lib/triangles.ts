@@ -138,23 +138,50 @@ export const translit = (id: string, alphabet: AlphabetId) =>
 const HEBREW_FINALS: Record<string, string> = { ך: "כ", ם: "מ", ן: "נ", ף: "פ", ץ: "צ" };
 const ARABIC_VARIANTS: Record<string, string> = { ا: "ء", أ: "ء", إ: "ء", آ: "ء", ؤ: "ء", ئ: "ء", ى: "ي", ة: "ت" };
 
-/** Map a typed key (native script, Phoenician, or Latin transliteration) to a letter id. */
+// Roots from any Semitic language are fair game in any alphabet, so a
+// keyboard in one script can type into a game in the other.
+// Arabic into the 22: the abjad correspondences, and Arabic's six extra
+// letters folded into their usual Hebrew cognates.
+const ARABIC_TO_CANAANITE: Record<string, string> = {
+  ء: "א", ب: "ב", ج: "ג", د: "ד", ه: "ה", و: "ו", ز: "ז", ح: "ח", ط: "ט", ي: "י",
+  ك: "כ", ل: "ל", م: "מ", ن: "נ", س: "ס", ع: "ע", ف: "פ", ص: "צ", ق: "ק", ر: "ר",
+  ش: "ש", ت: "ת", ث: "ש", خ: "ח", ذ: "ז", ض: "צ", ظ: "צ", غ: "ע",
+};
+// The 22 into Arabic: the abjad correspondences.
+const CANAANITE_TO_ARABIC: Record<string, string> = {
+  א: "ء", ב: "ب", ג: "ج", ד: "د", ה: "ه", ו: "و", ז: "ز", ח: "ح", ט: "ط", י: "ي",
+  כ: "ك", ל: "ل", מ: "م", נ: "ن", ס: "س", ע: "ع", פ: "ف", צ: "ص", ק: "ق", ר: "ر",
+  ש: "ش", ת: "ت",
+};
+
+/** Typed Hebrew, Paleo-Hebrew or Syriac as a 22-letter id, if it is one. */
+const canaaniteFromGlyph = (key: string): string | null => {
+  const k = HEBREW_FINALS[key] ?? key;
+  if (CANAANITE.some((l) => l.id === k)) return k;
+  for (const glyphs of Object.values(CANAANITE_GLYPHS)) {
+    const p = glyphs.indexOf(key);
+    if (p >= 0) return CANAANITE[p].id;
+  }
+  return null;
+};
+
+/** Map a typed key (any Semitic script, or Latin transliteration) to a letter id. */
 export const letterFromKey = (key: string, alphabet: AlphabetId): string | null => {
   const letters = ALPHABETS[alphabet].letters;
   if (alphabet === "canaanite") {
-    const k = HEBREW_FINALS[key] ?? key;
-    if (letters.some((l) => l.id === k)) return k;
-    for (const glyphs of Object.values(CANAANITE_GLYPHS)) {
-      const p = glyphs.indexOf(key);
-      if (p >= 0) return letters[p].id;
-    }
+    const native = canaaniteFromGlyph(key);
+    if (native) return native;
+    const fromArabic = ARABIC_TO_CANAANITE[ARABIC_VARIANTS[key] ?? key];
+    if (fromArabic) return fromArabic;
     // Exact match first so that "S" (shin) and "s" (samekh) stay distinct.
     const exact = letters.find((l) => l.keys?.includes(key));
     if (exact) return exact.id;
     return letters.find((l) => l.keys?.includes(key.toLowerCase()))?.id ?? null;
   }
   const k = ARABIC_VARIANTS[key] ?? key;
-  return letters.some((l) => l.id === k) ? k : null;
+  if (letters.some((l) => l.id === k)) return k;
+  const c = canaaniteFromGlyph(key);
+  return c ? CANAANITE_TO_ARABIC[c] : null;
 };
 
 // ------------------------------------------------------------------- game
@@ -168,8 +195,15 @@ export type Move = {
   /** The letter placed on each corner, in triVerts order. */
   corners: string[];
   gloss: string;
+  /** Which language the player drew the root from, if they said. */
+  lang?: string;
   player: number;
 };
+
+export const LANGUAGES = [
+  "Hebrew", "Aramaic", "Syriac", "Arabic", "Akkadian", "Ugaritic", "Phoenician",
+  "Ge'ez", "Amharic", "Tigrinya", "Old South Arabian", "Mehri", "Soqotri", "Maltese",
+];
 
 export type Game = {
   version: 1;

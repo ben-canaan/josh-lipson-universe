@@ -5,7 +5,7 @@ import {
   ArrowLeft, Crosshair, ExternalLink, Link2, Minus, Plus, RotateCw, SkipForward, Undo2, X,
 } from "lucide-react";
 import {
-  ALPHABETS, AlphabetId, Game, H, SCRIPT_FONT, SCRIPT_LABEL, ScriptId, Tri,
+  ALPHABETS, AlphabetId, Game, H, LANGUAGES, SCRIPT_FONT, SCRIPT_LABEL, ScriptId, Tri,
   arrangements, boardOf, canPlayAt, checkRoot, decodeGame, encodeGame, fixedCorners, glyph,
   letterFromKey, newGame, parseStoredGame, parseTri, scores, tKey, translit, triAt, triCentroid,
   triVerts, vPos,
@@ -46,6 +46,8 @@ const Triangles = () => {
   const [root, setRoot] = useState<string[]>([]);
   const [arrIdx, setArrIdx] = useState(0);
   const [gloss, setGloss] = useState("");
+  // Kept between moves: players tend to stay in one language for a while.
+  const [lang, setLang] = useState("");
   const [inspected, setInspected] = useState<number | null>(null);
   const [setupOpen, setSetupOpen] = useState(false);
   const [shareUrl, setShareUrl] = useState<string | null>(null);
@@ -105,11 +107,11 @@ const Triangles = () => {
     if (!selTri || !verdict?.ok || !preview) return;
     setGame((g) => ({
       ...g,
-      moves: [...g.moves, { tri: tKey(selTri), root, corners: preview, gloss: gloss.trim(), player: g.turn }],
+      moves: [...g.moves, { tri: tKey(selTri), root, corners: preview, gloss: gloss.trim(), ...(lang ? { lang } : {}), player: g.turn }],
       turn: (g.turn + 1) % g.players.length,
     }));
     clearComposer();
-  }, [selTri, verdict, preview, root, gloss]);
+  }, [selTri, verdict, preview, root, gloss, lang]);
 
   const pass = () => {
     clearComposer();
@@ -296,6 +298,8 @@ const Triangles = () => {
                 cycle={() => setArrIdx((i) => i + 1)}
                 gloss={gloss}
                 setGloss={setGloss}
+                lang={lang}
+                setLang={setLang}
                 verdict={verdict!}
                 place={place}
                 cancel={clearComposer}
@@ -308,6 +312,7 @@ const Triangles = () => {
                 <div className="flex items-start justify-between">
                   <p className="text-xs text-muted-foreground mb-1">
                     Root {inspected! + 1} · {game.players[inspectedMove.player]?.name}
+                    {inspectedMove.lang && <> · {inspectedMove.lang}</>}
                   </p>
                   <button onClick={() => setInspected(null)} aria-label="Close" className="text-muted-foreground hover:text-foreground">
                     <X className="w-4 h-4" />
@@ -344,6 +349,7 @@ const Triangles = () => {
                       <span dir="rtl" className="text-lg w-16 text-right" style={{ fontFamily }}>{rootText(m.root, game)}</span>
                       <span className="text-muted-foreground truncate">
                         {rootTranslit(m.root, game)}{m.gloss && <span className="italic"> · {m.gloss}</span>}
+                        {m.lang && <span className="ml-1.5 text-[10px] uppercase tracking-wider px-1.5 py-0.5 rounded bg-secondary text-muted-foreground not-italic">{m.lang}</span>}
                       </span>
                     </button>
                   </li>
@@ -394,7 +400,7 @@ const Triangles = () => {
               <div className="mt-3 space-y-2 text-muted-foreground leading-relaxed">
                 <p>Each triangle holds one three-letter Semitic root, one radical on each corner. Where six triangles meet at a point, they all share that letter.</p>
                 <p>So a new root has to fit the letters already on its corners: one shared letter with every triangle it touches at a point, two with every triangle it shares a side with.</p>
-                <p>Any root from any Semitic language is fair game, in whichever alphabet you're playing. No root may be played twice. Stuck? Pass the pen; no record is kept of the fumble.</p>
+                <p>Any root from any Semitic language is fair game: Hebrew, Aramaic, Arabic, Akkadian, Ge'ez and the rest, spelled in this game's alphabet. Tag each root with its language if you like. No root may be played twice. Stuck? Pass the pen; no record is kept of the fumble.</p>
                 <p>Playing alone, keep going until you drop. Playing apart, copy the game link after your move and send it.</p>
                 <a href={ESSAY_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-primary hover:underline">
                   The essay behind the game <ExternalLink className="w-3 h-3" />
@@ -627,6 +633,8 @@ type ComposerProps = {
   cycle: () => void;
   gloss: string;
   setGloss: (s: string) => void;
+  lang: string;
+  setLang: (s: string) => void;
   verdict: { ok: boolean; reason?: string };
   place: () => void;
   cancel: () => void;
@@ -693,9 +701,16 @@ const Composer = (p: ComposerProps) => {
         </button>
       )}
 
-      <input value={p.gloss} onChange={(e) => p.setGloss(e.target.value)} placeholder="Meaning (optional), e.g. writing"
-        className="w-full px-3 py-2 rounded-md border border-input bg-background text-sm"
-        onKeyDown={(e) => { if (e.key === "Enter") p.place(); }} />
+      <div className="flex gap-2">
+        <input id="root-gloss" value={p.gloss} onChange={(e) => p.setGloss(e.target.value)} placeholder="Meaning (optional)"
+          aria-label="Meaning" className="flex-1 min-w-0 px-3 py-2 rounded-md border border-input bg-background text-sm"
+          onKeyDown={(e) => { if (e.key === "Enter") p.place(); }} />
+        <select id="root-lang" value={p.lang} onChange={(e) => p.setLang(e.target.value)} aria-label="Language the root comes from"
+          className={`w-32 px-2 py-2 rounded-md border border-input bg-background text-sm ${p.lang ? "" : "text-muted-foreground"}`}>
+          <option value="">Language</option>
+          {LANGUAGES.map((l) => <option key={l} value={l}>{l}</option>)}
+        </select>
+      </div>
 
       {full && !p.verdict.ok && <p className="text-destructive text-xs">{p.verdict.reason}</p>}
 
@@ -710,7 +725,7 @@ const Composer = (p: ComposerProps) => {
         </button>
       </div>
       <p className="text-[11px] text-muted-foreground leading-snug">
-        Keyboard: type in Hebrew, Syriac or Arabic{game.alphabet === "canaanite" && <>, or Latin (x = ḥ, T = ṭ, c = ṣ, S = š, e = ʿ, a = ʾ)</>}. Enter places, Tab turns, Esc cancels.
+        Keyboard: type in Hebrew, Syriac or Arabic (either works in any game){game.alphabet === "canaanite" && <>, or Latin (x = ḥ, T = ṭ, c = ṣ, S = š, e = ʿ, a = ʾ)</>}. Enter places, Tab turns, Esc cancels.
       </p>
     </div>
   );
