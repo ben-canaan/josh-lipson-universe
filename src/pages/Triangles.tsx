@@ -48,6 +48,7 @@ const Triangles = () => {
   const [gloss, setGloss] = useState("");
   const [inspected, setInspected] = useState<number | null>(null);
   const [setupOpen, setSetupOpen] = useState(false);
+  const [shareUrl, setShareUrl] = useState<string | null>(null);
   const [cam, setCam] = useState<Camera>({ x: 0.5, y: H / 3, z: 130 });
 
   const board = useMemo(() => boardOf(game), [game]);
@@ -182,11 +183,12 @@ const Triangles = () => {
 
   const share = async () => {
     const url = `${window.location.origin}${window.location.pathname}#g=${encodeGame(game)}`;
+    setShareUrl(url);
     try {
       await navigator.clipboard.writeText(url);
       toast.success("Link copied. Send it to your opponent; they play and send one back.");
     } catch {
-      window.prompt("Copy this link:", url);
+      toast("Copy the link below and send it to your opponent.");
     }
   };
 
@@ -371,6 +373,15 @@ const Triangles = () => {
                 New game
               </button>
             </div>
+            {shareUrl && (
+              <div className="flex gap-1.5">
+                <input id="share-url" readOnly value={shareUrl} onFocus={(e) => e.currentTarget.select()}
+                  aria-label="Game link" className="flex-1 min-w-0 px-2 py-1.5 rounded border border-input bg-background text-xs" />
+                <button onClick={() => setShareUrl(null)} aria-label="Hide link" className="px-2 rounded border border-border hover:bg-secondary">
+                  <X className="w-3.5 h-3.5" />
+                </button>
+              </div>
+            )}
             {setupOpen && <Setup game={game} onStart={startGame} onCancel={() => setSetupOpen(false)} />}
           </section>
 
@@ -710,8 +721,12 @@ const Composer = (p: ComposerProps) => {
 const Setup = ({ game, onStart, onCancel }: { game: Game; onStart: (a: AlphabetId, names: string[]) => void; onCancel: () => void }) => {
   const [alphabet, setAlphabet] = useState<AlphabetId>(game.alphabet);
   const [names, setNames] = useState<string[]>(game.players.map((p) => p.name));
+  const [confirming, setConfirming] = useState(false);
   const start = () => {
-    if (game.moves.length && !window.confirm("Start over? The current board will be cleared.")) return;
+    if (game.moves.length && !confirming) {
+      setConfirming(true);
+      return;
+    }
     onStart(alphabet, names.map((n, i) => n.trim() || `Player ${i + 1}`));
   };
   return (
@@ -747,8 +762,13 @@ const Setup = ({ game, onStart, onCancel }: { game: Game; onStart: (a: AlphabetI
           )}
         </div>
       </div>
+      {confirming && (
+        <p className="text-xs text-destructive">This clears the current board ({game.moves.length} {game.moves.length === 1 ? "root" : "roots"}). Undo can't bring it back.</p>
+      )}
       <div className="flex gap-2">
-        <button onClick={start} className="flex-1 py-2 rounded-md bg-primary text-primary-foreground font-medium">Start</button>
+        <button onClick={start} className="flex-1 py-2 rounded-md bg-primary text-primary-foreground font-medium">
+          {confirming ? "Clear the board and start" : "Start"}
+        </button>
         <button onClick={onCancel} className="px-3 py-2 rounded-md border border-border hover:bg-secondary">Cancel</button>
       </div>
     </div>
