@@ -457,7 +457,7 @@ const Triangles = () => {
                 <p>Any root from any Semitic language is fair game: Hebrew, Aramaic, Arabic, Akkadian, Ge'ez and the rest, spelled in this game's alphabet. Tag each root with its language if you like. No root may be played twice. Stuck? Pass the pen; no record is kept of the fumble.</p>
                 <p>Playing alone, keep going until you drop. Playing apart, copy the game link after your move and send it.</p>
                 <p className="text-xs">
-                  When a root is laid down, the game looks it up in Brown–Driver–Briggs (Hebrew and Aramaic; digital edition by the Open Scriptures Hebrew Bible Project, CC BY 4.0) and in Lane's <i>Arabic-English Lexicon</i> (text provided by Perseus Digital Library, with funding from The U.S. Department of Education and The Max Planck Society). A root missing from both is still fair: they don't cover Akkadian, Ge'ez or the rest.
+                  When a root is laid down, the game looks it up in Wiktionary (CC BY-SA 4.0, via kaikki.org), Brown–Driver–Briggs (Hebrew and Aramaic; digital edition by the Open Scriptures Hebrew Bible Project, CC BY 4.0) and Lane's <i>Arabic-English Lexicon</i> (text provided by Perseus Digital Library, with funding from The U.S. Department of Education and The Max Planck Society). A root missing from all three is still fair: they don't cover Akkadian, Ge'ez or the rest.
                 </p>
                 <a href={ESSAY_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-primary hover:underline">
                   The essay behind the game <ExternalLink className="w-3 h-3" />
