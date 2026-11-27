@@ -32,7 +32,7 @@ const Services = () => {
               </h2>
             </div>
             <p className="text-muted-foreground font-body leading-relaxed mb-6 max-w-2xl">
-              I'm setting up a private psychotherapy practice in New York, opening in late 2026, with particular interests in psychedelic integration, spirituality, meaning, identity, and psychological growth. If you're interested in working together clinically, please join the waitlist on my practice website.
+              I have a private psychotherapy practice in New York, with particular interests in psychedelic integration, spirituality, meaning, identity, and psychological growth. I see adults by telehealth across New York State and am accepting new clients. If you're interested in working together, you can request a free consultation on my practice website.
             </p>
             <a
               href="https://drjoshlipson.com"
