@@ -122,6 +122,13 @@ const academicWork = [
 
 const projects = [
   {
+    title: "Semitic Triangles",
+    description:
+      "A word game built on the three-letter Semitic root: fill an endless lattice of triangles with Hebrew, Paleo-Hebrew, Syriac, and Arabic roots, each corner a letter shared by its neighbors. Play alone, pass and play, or trade moves by link.",
+    link: "https://semitictriangles.com",
+    linkLabel: "Play at semitictriangles.com",
+  },
+  {
     title: "Post-Psychedelic Challenges Study",
     description: "An international multi-site study examining the nature, prevalence, and resolution of difficulties that persist after psychedelic experiences. Launched in summer 2025 through the Emory Center for Psychedelics and Spirituality, led by Dr. Roman Palitsky. Currently the largest dataset of its kind.",
     link: "https://www.lucid.news/difficulties-after-a-trip-emory-center-for-psychedelics/",
