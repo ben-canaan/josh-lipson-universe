@@ -1,7 +1,6 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import { Link } from "react-router-dom";
-import { ArrowRight, ExternalLink } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 
 const essays = [
   {
@@ -255,29 +254,17 @@ const Essays = () => {
                   <p className="text-muted-foreground font-body leading-relaxed mb-4">
                     {project.description}
                   </p>
-                  {project.link.startsWith("/") ? (
-                    <Link
-                      to={project.link}
-                      className="inline-flex items-center gap-2 text-sm font-body text-foreground hover:text-primary transition-colors group"
-                    >
-                      <span className="border-b border-foreground/20 group-hover:border-primary pb-0.5">
-                        {project.linkLabel}
-                      </span>
-                      <ArrowRight className="w-3 h-3" />
-                    </Link>
-                  ) : (
-                    <a
-                      href={project.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 text-sm font-body text-foreground hover:text-primary transition-colors group"
-                    >
-                      <span className="border-b border-foreground/20 group-hover:border-primary pb-0.5">
-                        {project.linkLabel}
-                      </span>
-                      <ExternalLink className="w-3 h-3" />
-                    </a>
-                  )}
+                  <a
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-sm font-body text-foreground hover:text-primary transition-colors group"
+                  >
+                    <span className="border-b border-foreground/20 group-hover:border-primary pb-0.5">
+                      {project.linkLabel}
+                    </span>
+                    <ExternalLink className="w-3 h-3" />
+                  </a>
                 </div>
               ))}
             </div>
