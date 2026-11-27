@@ -125,9 +125,9 @@ const projects = [
   {
     title: "Semitic Triangles",
     description:
-      "A word game built on the three-letter Semitic root: fill an endless lattice of triangles with Hebrew, Arabic, and Paleo-Hebrew roots, each corner a letter shared by its neighbors. Play alone, pass and play, or trade moves by link.",
-    link: "/triangles",
-    linkLabel: "Play the game",
+      "A word game built on the three-letter Semitic root: fill an endless lattice of triangles with Hebrew, Paleo-Hebrew, Syriac, and Arabic roots, each corner a letter shared by its neighbors. Play alone, pass and play, or trade moves by link.",
+    link: "https://semitictriangles.com",
+    linkLabel: "Play at semitictriangles.com",
   },
   {
     title: "Post-Psychedelic Challenges Study",

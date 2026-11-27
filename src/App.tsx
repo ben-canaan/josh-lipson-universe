@@ -10,7 +10,6 @@ import Artwork from "./pages/Artwork";
 import Essays from "./pages/Essays";
 import Services from "./pages/Services";
 import Speaking from "./pages/Speaking";
-import Triangles from "./pages/Triangles";
 import NotFound from "./pages/NotFound";
 import { routeMeta, notFoundMeta } from "./seo";
 
@@ -41,7 +40,6 @@ const App = () => (
         <Route path="/essays" element={<Essays />} />
         <Route path="/speaking" element={<Speaking />} />
         <Route path="/services" element={<Services />} />
-        <Route path="/triangles" element={<Triangles />} />
         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
         <Route path="*" element={<NotFound />} />
       </Routes>
