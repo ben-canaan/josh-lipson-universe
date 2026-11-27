@@ -5,7 +5,7 @@ import {
   ArrowLeft, Crosshair, ExternalLink, Link2, Minus, Plus, RotateCw, SkipForward, Undo2, X,
 } from "lucide-react";
 import {
-  ALPHABETS, AlphabetId, Game, H, LANGUAGES, SCRIPT_FONT, SCRIPT_LABEL, ScriptId, Tri,
+  ALPHABETS, AlphabetId, Game, H, LANGUAGES, Lexicon, RootSense, buildRootIndex, lookupRoot, SCRIPT_FONT, SCRIPT_LABEL, ScriptId, Tri,
   arrangements, boardOf, canPlayAt, checkRoot, decodeGame, encodeGame, fixedCorners, glyph,
   letterFromKey, newGame, parseStoredGame, parseTri, scores, tKey, translit, triAt, triCentroid,
   triVerts, vPos,
@@ -53,9 +53,12 @@ const Triangles = () => {
   const [shareUrl, setShareUrl] = useState<string | null>(null);
   // A script from the other alphabet, waiting for the player to agree to a fresh board.
   const [pendingScript, setPendingScript] = useState<ScriptId | null>(null);
+  const [lex, setLex] = useState<Lexicon | null>(null);
   const [cam, setCam] = useState<Camera>({ x: 0.5, y: H / 3, z: 130 });
 
   const board = useMemo(() => boardOf(game), [game]);
+  const rootIndex = useMemo(() => (lex ? buildRootIndex(lex, game.alphabet) : null), [lex, game.alphabet]);
+  const rootInfo = rootIndex && root.length === 3 ? lookupRoot(rootIndex, root) : null;
   const selTri = selected ? parseTri(selected) : null;
   const fixed = selTri ? fixedCorners(board, selTri) : null;
   const arrs = fixed && root.length === 3 ? arrangements(fixed, root) : [];
@@ -70,6 +73,11 @@ const Triangles = () => {
     link.rel = "stylesheet";
     link.href = FONTS_HREF;
     document.head.appendChild(link);
+  }, []);
+
+  // The root dictionary loads separately so the board appears at once.
+  useEffect(() => {
+    import("@/data/roots.json").then((m) => setLex(m.default as unknown as Lexicon)).catch(() => {});
   }, []);
 
   // Load: a shared link wins, then this browser's saved game.
@@ -107,13 +115,17 @@ const Triangles = () => {
 
   const place = useCallback(() => {
     if (!selTri || !verdict?.ok || !preview) return;
+    // With no meaning typed, take the dictionary's.
+    const known = rootInfo?.senses.find((s) => !lang || s.lang === lang) ?? rootInfo?.senses[0];
+    const meaning = gloss.trim() || known?.gloss || "";
+    const language = lang || (!gloss.trim() && known ? known.lang : "");
     setGame((g) => ({
       ...g,
-      moves: [...g.moves, { tri: tKey(selTri), root, corners: preview, gloss: gloss.trim(), ...(lang ? { lang } : {}), player: g.turn }],
+      moves: [...g.moves, { tri: tKey(selTri), root, corners: preview, gloss: meaning, ...(language ? { lang: language } : {}), player: g.turn }],
       turn: (g.turn + 1) % g.players.length,
     }));
     clearComposer();
-  }, [selTri, verdict, preview, root, gloss, lang]);
+  }, [selTri, verdict, preview, root, gloss, lang, rootInfo]);
 
   const pass = () => {
     clearComposer();
@@ -319,6 +331,9 @@ const Triangles = () => {
                 setGloss={setGloss}
                 lang={lang}
                 setLang={setLang}
+                rootInfo={rootInfo}
+                lexReady={!!lex}
+                useSense={(s: RootSense) => { setGloss(s.gloss); setLang(s.lang); }}
                 verdict={verdict!}
                 place={place}
                 cancel={clearComposer}
@@ -395,7 +410,7 @@ const Triangles = () => {
                 ))}
               </div>
               <p className="text-[11px] text-muted-foreground mt-1.5">
-                Paleo-Hebrew, Hebrew and Syriac share 22 letters, so you can switch mid-game. Arabic has 28 and plays on its own board.
+                Paleo-Hebrew and Hebrew share a board, so you can switch between them mid-game. Syriac and Arabic each have a board of their own.
               </p>
               {pendingScript && (
                 <div className="mt-2 rounded-md border border-border p-3 space-y-2 bg-card">
@@ -441,6 +456,9 @@ const Triangles = () => {
                 <p>So a new root has to fit the letters already on its corners: one shared letter with every triangle it touches at a point, two with every triangle it shares a side with.</p>
                 <p>Any root from any Semitic language is fair game: Hebrew, Aramaic, Arabic, Akkadian, Ge'ez and the rest, spelled in this game's alphabet. Tag each root with its language if you like. No root may be played twice. Stuck? Pass the pen; no record is kept of the fumble.</p>
                 <p>Playing alone, keep going until you drop. Playing apart, copy the game link after your move and send it.</p>
+                <p className="text-xs">
+                  When a root is laid down, the game looks it up in Brown–Driver–Briggs (Hebrew and Aramaic; digital edition by the Open Scriptures Hebrew Bible Project, CC BY 4.0) and in Lane's <i>Arabic-English Lexicon</i> (text provided by Perseus Digital Library, with funding from The U.S. Department of Education and The Max Planck Society). A root missing from both is still fair: they don't cover Akkadian, Ge'ez or the rest.
+                </p>
                 <a href={ESSAY_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-primary hover:underline">
                   The essay behind the game <ExternalLink className="w-3 h-3" />
                 </a>
@@ -674,6 +692,9 @@ type ComposerProps = {
   setGloss: (s: string) => void;
   lang: string;
   setLang: (s: string) => void;
+  rootInfo: ReturnType<typeof lookupRoot> | null;
+  lexReady: boolean;
+  useSense: (s: RootSense) => void;
   verdict: { ok: boolean; reason?: string };
   place: () => void;
   cancel: () => void;
@@ -734,6 +755,8 @@ const Composer = (p: ComposerProps) => {
         ))}
       </div>
 
+      {full && p.lexReady && p.rootInfo && <RootNotes p={p} />}
+
       {full && p.arrCount > 1 && (
         <button onClick={p.cycle} className="w-full flex items-center justify-center gap-2 py-1.5 rounded-md border border-border hover:bg-secondary">
           <RotateCw className="w-3.5 h-3.5" /> Turn it on the board ({(p.arrIdx % p.arrCount) + 1} of {p.arrCount})
@@ -764,7 +787,7 @@ const Composer = (p: ComposerProps) => {
         </button>
       </div>
       <p className="text-[11px] text-muted-foreground leading-snug">
-        Keyboard: type in Hebrew, Syriac or Arabic (either works in any game){game.alphabet === "canaanite" && <>, or Latin (x = ḥ, T = ṭ, c = ṣ, S = š, e = ʿ, a = ʾ)</>}. Enter places, Tab turns, Esc cancels.
+        Keyboard: type in Hebrew, Syriac or Arabic (either works in any game){game.alphabet !== "arabic" && <>, or Latin (x = ḥ, T = ṭ, c = ṣ, S = š, e = ʿ, a = ʾ)</>}. Enter places, Tab turns, Esc cancels.
       </p>
     </div>
   );
@@ -830,3 +853,42 @@ const Setup = ({ game, onStart, onCancel }: { game: Game; onStart: (a: AlphabetI
 };
 
 export default Triangles;
+
+// What the dictionary says about the root being composed.
+const RootNotes = ({ p }: { p: ComposerProps }) => {
+  const { senses, otherOrders } = p.rootInfo!;
+  const { game, fontFamily } = p;
+  return (
+    <div className="rounded-md bg-secondary/50 px-3 py-2.5 space-y-2 text-xs">
+      {senses.length ? (
+        <div className="space-y-1">
+          <p className="text-muted-foreground">In the dictionary · tap to use</p>
+          {senses.map((s) => (
+            <button key={s.lang} onClick={() => p.useSense(s)}
+              className={`block w-full text-left rounded px-1.5 py-1 hover:bg-background/70 ${p.gloss === s.gloss ? "bg-background/70" : ""}`}>
+              <span className="uppercase tracking-wider text-[10px] text-muted-foreground mr-1.5">{s.lang}</span>
+              <span className="text-foreground/90">{s.gloss}</span>
+            </button>
+          ))}
+        </div>
+      ) : (
+        <p className="text-muted-foreground">
+          Not in the Hebrew, Aramaic or Arabic dictionaries. Still fair if it comes from another Semitic language: add its meaning and language below.
+        </p>
+      )}
+      {otherOrders.length > 0 && (
+        <div className="space-y-1 pt-1 border-t border-border/60">
+          <p className="text-muted-foreground">Same letters, other roots · tap to switch</p>
+          {otherOrders.slice(0, 4).map((o) => (
+            <button key={o.root.join("")} onClick={() => p.setRoot(o.root)}
+              className="flex w-full items-baseline gap-2 text-left rounded px-1.5 py-1 hover:bg-background/70">
+              <span dir="rtl" className="text-base shrink-0" style={{ fontFamily }}>{o.root.map((l) => glyph(l, game.script)).join(" ")}</span>
+              <span className="text-muted-foreground shrink-0">{rootTranslit(o.root, game)}</span>
+              <span className="truncate text-foreground/80">{o.senses[0].gloss}</span>
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};

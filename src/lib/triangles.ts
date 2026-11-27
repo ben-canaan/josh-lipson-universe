@@ -54,15 +54,16 @@ export const triAt = (x: number, y: number): Tri => {
 
 // --------------------------------------------------------------- alphabets
 
-export type AlphabetId = "canaanite" | "arabic";
+export type AlphabetId = "canaanite" | "syriac" | "arabic";
 export type ScriptId = "hebrew" | "paleo" | "syriac" | "arabic";
 
 type Letter = { id: string; translit: string; keys?: string[] };
 
 // Letters are stored by their square-Hebrew form (or Arabic form), and
-// drawn in whichever script the players choose. Paleo-Hebrew/Phoenician,
-// square Hebrew and Syriac are the same 22-letter alphabet in the same
-// order, so a game can switch between them at any time.
+// drawn in the game's script. Paleo-Hebrew/Phoenician, square Hebrew and
+// Syriac are the same 22-letter alphabet in the same order. Paleo-Hebrew
+// and square Hebrew share a board and can be swapped mid-game; Syriac is
+// played on a board of its own.
 const CANAANITE: Letter[] = [
   { id: "א", translit: "ʾ", keys: ["a", "'"] },
   { id: "ב", translit: "b", keys: ["b"] },
@@ -106,7 +107,8 @@ const ARABIC: Letter[] = [
 ].map(([id, translit]) => ({ id, translit }));
 
 export const ALPHABETS: Record<AlphabetId, { label: string; letters: Letter[]; scripts: ScriptId[] }> = {
-  canaanite: { label: "Paleo-Hebrew, Hebrew, Syriac (22)", letters: CANAANITE, scripts: ["paleo", "hebrew", "syriac"] },
+  canaanite: { label: "Paleo-Hebrew & Hebrew (22)", letters: CANAANITE, scripts: ["paleo", "hebrew"] },
+  syriac: { label: "Syriac (22)", letters: CANAANITE, scripts: ["syriac"] },
   arabic: { label: "Arabic (28)", letters: ARABIC, scripts: ["arabic"] },
 };
 
@@ -142,7 +144,7 @@ const ARABIC_VARIANTS: Record<string, string> = { ا: "ء", أ: "ء", إ: "ء", 
 // keyboard in one script can type into a game in the other.
 // Arabic into the 22: by cognate, so س becomes ש (salām, šālôm), and
 // Arabic's six extra letters fold into their usual Hebrew counterparts.
-const ARABIC_TO_CANAANITE: Record<string, string> = {
+export const ARABIC_TO_CANAANITE: Record<string, string> = {
   ء: "א", ب: "ב", ج: "ג", د: "ד", ه: "ה", و: "ו", ز: "ז", ح: "ח", ط: "ט", ي: "י",
   ك: "כ", ل: "ל", م: "מ", ن: "נ", س: "ש", ع: "ע", ف: "פ", ص: "צ", ق: "ק", ر: "ר",
   ش: "ש", ت: "ת", ث: "ש", خ: "ח", ذ: "ז", ض: "צ", ظ: "צ", غ: "ע",
@@ -168,7 +170,7 @@ const canaaniteFromGlyph = (key: string): string | null => {
 /** Map a typed key (any Semitic script, or Latin transliteration) to a letter id. */
 export const letterFromKey = (key: string, alphabet: AlphabetId): string | null => {
   const letters = ALPHABETS[alphabet].letters;
-  if (alphabet === "canaanite") {
+  if (alphabet !== "arabic") {
     const native = canaaniteFromGlyph(key);
     if (native) return native;
     const fromArabic = ARABIC_TO_CANAANITE[ARABIC_VARIANTS[key] ?? key];
@@ -202,7 +204,8 @@ export type Move = {
 
 export const LANGUAGES = [
   "Hebrew", "Aramaic", "Syriac", "Arabic", "Akkadian", "Ugaritic", "Phoenician",
-  "Ge'ez", "Amharic", "Tigrinya", "Old South Arabian", "Mehri", "Soqotri", "Maltese",
+  "Ge'ez", "Amharic", "Tigrinya", "Tigre", "Old South Arabian", "Mehri", "Soqotri", "Maltese",
+  "Other Semitic",
 ];
 
 export type Game = {
@@ -321,12 +324,16 @@ export const scores = (game: Game) =>
 const isGame = (g: unknown): g is Game => {
   const x = g as Game;
   return (
-    !!x && x.version === 1 && (x.alphabet === "canaanite" || x.alphabet === "arabic") &&
+    !!x && x.version === 1 && (x.alphabet === "canaanite" || x.alphabet === "syriac" || x.alphabet === "arabic") &&
     Array.isArray(x.players) && x.players.length > 0 && Array.isArray(x.moves) &&
     x.moves.every((m) => typeof m.tri === "string" && Array.isArray(m.root) && Array.isArray(m.corners)) &&
     typeof x.turn === "number"
   );
 };
+
+/** Older saves drew Syriac on the shared Hebrew board; give it its own. */
+const normalize = (g: Game): Game =>
+  g.alphabet === "canaanite" && g.script === "syriac" ? { ...g, alphabet: "syriac" } : g;
 
 const toB64Url = (s: string) => {
   const bytes = new TextEncoder().encode(s);
@@ -345,7 +352,7 @@ export const encodeGame = (game: Game) => toB64Url(JSON.stringify(game));
 export const decodeGame = (s: string): Game | null => {
   try {
     const g = JSON.parse(fromB64Url(s));
-    return isGame(g) ? g : null;
+    return isGame(g) ? normalize(g) : null;
   } catch {
     return null;
   }
@@ -355,8 +362,68 @@ export const parseStoredGame = (s: string | null): Game | null => {
   if (!s) return null;
   try {
     const g = JSON.parse(s);
-    return isGame(g) ? g : null;
+    return isGame(g) ? normalize(g) : null;
   } catch {
     return null;
   }
+};
+
+// -------------------------------------------------------------- dictionary
+
+/**
+ * Roots from Brown-Driver-Briggs (Hebrew and Biblical Aramaic) and Lane's
+ * Arabic-English Lexicon, keyed by their three letters: square Hebrew for
+ * "he" and "arc", Arabic for "ar". Built by scripts/build_lexicon.py.
+ */
+export type Lexicon = { he: Record<string, string>; arc: Record<string, string>; ar: Record<string, string> };
+export type RootSense = { lang: "Hebrew" | "Aramaic" | "Arabic"; gloss: string };
+export type RootIndex = Map<string, RootSense[]>;
+
+const add = (idx: RootIndex, key: string, sense: RootSense) => {
+  const list = idx.get(key);
+  if (!list) idx.set(key, [sense]);
+  else if (list.length < 4 && !list.some((x) => x.lang === sense.lang)) list.push(sense);
+};
+
+/** Every dictionary root, spelled in the given alphabet's letters. */
+export const buildRootIndex = (lex: Lexicon, alphabet: AlphabetId): RootIndex => {
+  const idx: RootIndex = new Map();
+  if (alphabet === "arabic") {
+    for (const [k, gloss] of Object.entries(lex.ar)) add(idx, k, { lang: "Arabic", gloss });
+    // Hebrew ש answers to both Arabic ش and س (šālôm, salām).
+    const variants = (k: string): string[] => {
+      let out = [""];
+      for (const c of k) {
+        const opts = c === "ש" ? ["ش", "س"] : [CANAANITE_TO_ARABIC[c]];
+        out = out.flatMap((o) => opts.map((x) => o + x));
+      }
+      return out;
+    };
+    for (const [k, gloss] of Object.entries(lex.he)) for (const v of variants(k)) add(idx, v, { lang: "Hebrew", gloss });
+    for (const [k, gloss] of Object.entries(lex.arc)) for (const v of variants(k)) add(idx, v, { lang: "Aramaic", gloss });
+  } else {
+    for (const [k, gloss] of Object.entries(lex.he)) add(idx, k, { lang: "Hebrew", gloss });
+    for (const [k, gloss] of Object.entries(lex.arc)) add(idx, k, { lang: "Aramaic", gloss });
+    for (const [k, gloss] of Object.entries(lex.ar)) {
+      const c = [...k].map((x) => ARABIC_TO_CANAANITE[x]).join("");
+      if (c.length === 3) add(idx, c, { lang: "Arabic", gloss });
+    }
+  }
+  return idx;
+};
+
+/** What the dictionary knows about a root, and which other orders of its letters are roots too. */
+export const lookupRoot = (idx: RootIndex, root: string[]) => {
+  const senses = idx.get(root.join("")) ?? [];
+  const seen = new Set([root.join("")]);
+  const otherOrders: { root: string[]; senses: RootSense[] }[] = [];
+  for (const p of PERMS) {
+    const r = p.map((i) => root[i]);
+    const k = r.join("");
+    if (seen.has(k)) continue;
+    seen.add(k);
+    const s = idx.get(k);
+    if (s) otherOrders.push({ root: r, senses: s });
+  }
+  return { senses, otherOrders };
 };
