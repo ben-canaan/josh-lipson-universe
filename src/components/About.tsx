@@ -33,7 +33,7 @@ const About = () => {
             </p>
 
             <p className="font-body">
-              I'm setting up a private psychotherapy practice in New York, for people navigating psychedelic experiences, spiritual and existential questions, crises of belief, and other forms of intense or destabilizing inner weather. It opens in late 2026, and the waitlist is at <a href="https://drjoshlipson.com" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary/80 underline underline-offset-4 decoration-primary/30 hover:decoration-primary/60 transition-colors">drjoshlipson.com</a>.
+              I have a private psychotherapy practice in New York, for people navigating psychedelic experiences, spiritual and existential questions, crises of belief, and other forms of intense or destabilizing inner weather. I see adults by telehealth across New York State and am accepting new clients at <a href="https://drjoshlipson.com" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary/80 underline underline-offset-4 decoration-primary/30 hover:decoration-primary/60 transition-colors">drjoshlipson.com</a>.
             </p>
 
             <p className="font-body">
