@@ -51,6 +51,8 @@ const Triangles = () => {
   const [inspected, setInspected] = useState<number | null>(null);
   const [setupOpen, setSetupOpen] = useState(false);
   const [shareUrl, setShareUrl] = useState<string | null>(null);
+  // A script from the other alphabet, waiting for the player to agree to a fresh board.
+  const [pendingScript, setPendingScript] = useState<ScriptId | null>(null);
   const [cam, setCam] = useState<Camera>({ x: 0.5, y: H / 3, z: 130 });
 
   const board = useMemo(() => boardOf(game), [game]);
@@ -194,8 +196,25 @@ const Triangles = () => {
     }
   };
 
-  const startGame = (alphabet: AlphabetId, names: string[]) => {
-    const g = newGame(alphabet, names);
+  const alphabetOf = (s: ScriptId) =>
+    (Object.keys(ALPHABETS) as AlphabetId[]).find((a) => ALPHABETS[a].scripts.includes(s))!;
+
+  // Scripts of the same alphabet redraw the board; the other alphabet needs a new game.
+  const chooseScript = (s: ScriptId) => {
+    const a = alphabetOf(s);
+    if (a === game.alphabet) {
+      setGame((g) => ({ ...g, script: s }));
+      setPendingScript(null);
+    } else if (game.moves.length === 0) {
+      startGame(a, game.players.map((p) => p.name), s);
+    } else {
+      setPendingScript(s);
+    }
+  };
+
+  const startGame = (alphabet: AlphabetId, names: string[], script?: ScriptId) => {
+    const g = { ...newGame(alphabet, names), ...(script ? { script } : {}) };
+    setPendingScript(null);
     setGame(g);
     clearComposer();
     setInspected(null);
@@ -361,16 +380,36 @@ const Triangles = () => {
           {/* Game controls */}
           <section className="space-y-3">
             <h2 className="text-xs tracking-[0.25em] uppercase text-primary">Game</h2>
-            {ALPHABETS[game.alphabet].scripts.length > 1 && (
-              <div className="flex rounded-md border border-border overflow-hidden w-fit">
-                {ALPHABETS[game.alphabet].scripts.map((s: ScriptId) => (
-                  <button key={s} onClick={() => setGame((g) => ({ ...g, script: s }))}
-                    className={`px-3 py-1.5 ${game.script === s ? "bg-secondary font-medium" : "text-muted-foreground hover:bg-secondary/50"}`}>
-                    {SCRIPT_LABEL[s]}
-                  </button>
+            <div>
+              <p className="text-xs text-muted-foreground mb-1.5">Script</p>
+              <div className="flex flex-wrap gap-1.5">
+                {(Object.keys(ALPHABETS) as AlphabetId[]).map((a) => (
+                  <div key={a} className="flex rounded-md border border-border overflow-hidden">
+                    {ALPHABETS[a].scripts.map((s: ScriptId) => (
+                      <button key={s} onClick={() => chooseScript(s)} aria-pressed={game.script === s}
+                        className={`px-3 py-1.5 ${game.script === s ? "bg-secondary font-medium" : "text-muted-foreground hover:bg-secondary/50"}`}>
+                        {SCRIPT_LABEL[s]}
+                      </button>
+                    ))}
+                  </div>
                 ))}
               </div>
-            )}
+              <p className="text-[11px] text-muted-foreground mt-1.5">
+                Paleo-Hebrew, Hebrew and Syriac share 22 letters, so you can switch mid-game. Arabic has 28 and plays on its own board.
+              </p>
+              {pendingScript && (
+                <div className="mt-2 rounded-md border border-border p-3 space-y-2 bg-card">
+                  <p>{SCRIPT_LABEL[pendingScript]} uses a different alphabet, so it needs a fresh board. This clears the current game ({game.moves.length} {game.moves.length === 1 ? "root" : "roots"}).</p>
+                  <div className="flex gap-2">
+                    <button onClick={() => startGame(alphabetOf(pendingScript), game.players.map((p) => p.name), pendingScript)}
+                      className="flex-1 py-1.5 rounded-md bg-primary text-primary-foreground font-medium">
+                      New {SCRIPT_LABEL[pendingScript]} game
+                    </button>
+                    <button onClick={() => setPendingScript(null)} className="px-3 py-1.5 rounded-md border border-border hover:bg-secondary">Cancel</button>
+                  </div>
+                </div>
+              )}
+            </div>
             <div className="flex flex-wrap gap-2">
               <button onClick={share} className="flex items-center gap-1.5 px-3 py-1.5 rounded-md border border-border hover:bg-secondary">
                 <Link2 className="w-3.5 h-3.5" /> Copy game link

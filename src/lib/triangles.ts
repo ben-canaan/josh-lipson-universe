@@ -140,11 +140,11 @@ const ARABIC_VARIANTS: Record<string, string> = { ا: "ء", أ: "ء", إ: "ء", 
 
 // Roots from any Semitic language are fair game in any alphabet, so a
 // keyboard in one script can type into a game in the other.
-// Arabic into the 22: the abjad correspondences, and Arabic's six extra
-// letters folded into their usual Hebrew cognates.
+// Arabic into the 22: by cognate, so س becomes ש (salām, šālôm), and
+// Arabic's six extra letters fold into their usual Hebrew counterparts.
 const ARABIC_TO_CANAANITE: Record<string, string> = {
   ء: "א", ب: "ב", ج: "ג", د: "ד", ه: "ה", و: "ו", ز: "ז", ح: "ח", ط: "ט", ي: "י",
-  ك: "כ", ل: "ל", م: "מ", ن: "נ", س: "ס", ع: "ע", ف: "פ", ص: "צ", ق: "ק", ر: "ר",
+  ك: "כ", ل: "ל", م: "מ", ن: "נ", س: "ש", ع: "ע", ف: "פ", ص: "צ", ق: "ק", ر: "ר",
   ش: "ש", ت: "ת", ث: "ש", خ: "ח", ذ: "ז", ض: "צ", ظ: "צ", غ: "ע",
 };
 // The 22 into Arabic: the abjad correspondences.
